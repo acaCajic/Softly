@@ -1,0 +1,8 @@
+@use './scss/font' as *;
+@use './scss/filesettings' as *;
+
+body,
+html,
+#root {
+  @extend %font;
+}

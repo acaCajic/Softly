@@ -1,0 +1,50 @@
+@use '../../../scss/filesettings' as *;
+
+.btn-style {
+  @include size(140px, 28px);
+  @include font(18px, 22px, 600);
+  @include flex(row-reverse, center, center);
+
+  background-color: $softly-cream;
+  outline: none;
+  border: none;
+  font-family: Orqquidea-Sans;
+
+  &--primary {
+    border-radius: $border-radius;
+    transition: transform 150ms ease-in-out;
+    transform: scale(1);
+
+    &:active {
+      transform: scale(0.975);
+    }
+  }
+
+  &--icon {
+    background-color: transparent;
+  }
+  &--outline {
+    border: 1px solid #00261c;
+  }
+  &--solid {
+    background-color: $softly-cream;
+  }
+  &--link {
+  }
+  &--secondary {
+    color: red;
+    border: 1px solid $negative;
+    border-radius: $border-radius;
+  }
+  &--icon-left {
+    flex-direction: row;
+    svg {
+      margin-right: 8px;
+    }
+  }
+  &--icon-right {
+    svg {
+      margin-left: 8px;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+@use '../../../scss/filesettings' as *;
+
+.input {
+  @include flex(column, flex-start, left);
+
+  width: 304px;
+
+  &__label {
+    @include font(18px, 22px, 400);
+
+    margin: 0px 0px 8px 12px;
+    color: $softly-green;
+  }
+
+  &--error {
+  }
+  &--disable {
+  }
+
+  &__container {
+    @include flex(row, flex-start, left);
+
+    border: 1px solid $softly-green;
+    height: 44px;
+    box-sizing: border-box;
+
+    &,
+    input {
+      border-radius: $border-radius;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+      padding-left: 12px;
+      font-family: Bodoni;
+    }
+
+    &:focus-within {
+      > input:focus-within {
+      }
+    }
+
+    input {
+      border: none;
+    }
+  }
+}
