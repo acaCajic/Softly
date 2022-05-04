@@ -13,7 +13,7 @@ type ButtonProps = {
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
-<input type="checkbox"></input>;
+
 const Button: React.FC<ButtonProps> = (props) => {
   const {
     children,

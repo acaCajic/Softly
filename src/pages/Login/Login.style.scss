@@ -1,0 +1,46 @@
+@use '../../scss/filesettings' as *;
+
+.sy-login {
+  @include flex(column, center, center);
+
+  &__logo {
+    @include size(210px, 150px);
+
+    margin-bottom: 73px;
+  }
+  &__labelLogin {
+    @include font(24px, 28px, 700);
+
+    color: black;
+    margin-bottom: 102px;
+  }
+  &__inputEmail {
+    margin-bottom: 15px;
+  }
+  &__inputPassword {
+    margin-bottom: 22px;
+  }
+  &__checkBox_Label {
+    @include flex(row);
+  }
+  &__checkBoxAndLabel__checkBox {
+    margin-right: 73px;
+  }
+  &__btnForgotPassword {
+    @include font(14px, 16px, 400);
+  }
+  &__btnSubmit {
+    @include flex(row, right, center);
+
+    width: 100%;
+    margin-top: 22px;
+  }
+  &__btnSignUp_Text {
+    @include flex(row);
+    margin-top: 28px;
+    margin-right: 34px;
+  }
+  &__btnSignUp {
+    @include font(14px, 16px, 700);
+  }
+}

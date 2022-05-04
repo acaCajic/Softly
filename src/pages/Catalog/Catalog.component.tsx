@@ -3,6 +3,7 @@ import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
 import ArrowIcon from '../../icons/Arrow.icon';
+import Check from '../../icons/Check.icon';
 import './Catalog.style.scss';
 
 const Catalog: React.FC = () => {
@@ -45,7 +46,7 @@ const Catalog: React.FC = () => {
       </div>
       <div className="catalog-style__checkbox">
         <p>CheckBox</p>
-        <CheckBox labelName="Rember me"></CheckBox>
+        <CheckBox labelName="Rember me" icon={<Check />}></CheckBox>
       </div>
     </div>
   );
