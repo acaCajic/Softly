@@ -1,7 +1,13 @@
 @use '../../scss/filesettings' as *;
 
+body {
+  background-color: $softly-cream;
+}
+
 .sy-login {
   @include flex(column, center, center);
+
+  margin-top: 173px;
 
   &__logo {
     @include size(210px, 150px);
@@ -12,7 +18,7 @@
     @include font(24px, 28px, 700);
 
     color: black;
-    margin-bottom: 102px;
+    margin-bottom: 76px;
   }
   &__inputEmail {
     margin-bottom: 15px;
@@ -30,10 +36,11 @@
     @include font(14px, 16px, 400);
   }
   &__btnSubmit {
-    @include flex(row, right, center);
+    @include flex(row, center, center);
 
     width: 100%;
     margin-top: 22px;
+    margin-left: 156px;
   }
   &__btnSignUp_Text {
     @include flex(row);
@@ -42,5 +49,10 @@
   }
   &__btnSignUp {
     @include font(14px, 16px, 700);
+
+    text-decoration: none;
+    color: $softly-green;
+    margin-left: 3px;
+    padding-top: 4px;
   }
 }

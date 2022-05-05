@@ -6,10 +6,6 @@ import Login from '../Login/index';
 import './Home.styles.scss';
 
 const Home = () => {
-  return (
-    <div className="home-page">
-      <Login />
-    </div>
-  );
+  return <div className="home-page"></div>;
 };
 export default Home;

@@ -1,0 +1,63 @@
+@use '../../scss/filesettings' as *;
+
+body {
+  background-color: $softly-cream;
+}
+
+.sy-signUp {
+  @include flex(column, center, center);
+
+  width: min-content;
+  margin: 0 auto;
+
+  margin-top: 173px;
+
+  &__logo {
+    width: 210px;
+    height: 149px;
+  }
+  &__labelCreate {
+    @include font(24px, 28px, 700);
+
+    margin-top: 74px;
+    margin-bottom: 102px;
+  }
+  &__inputEmail {
+    margin-bottom: 15px;
+  }
+  &__inputPassword {
+    margin-bottom: 15px;
+  }
+  &__inputRepeatPassword {
+    margin-bottom: 24px;
+  }
+  &__checkBoxP {
+    @include flex(row);
+  }
+  &__p {
+    margin-top: 4px;
+    margin-bottom: 42px;
+  }
+  &__btnGo {
+    @include flex(row, right, center);
+
+    width: 100%;
+    margin-bottom: 27px;
+  }
+  &__btnLoginP {
+    @include flex(row);
+  }
+  &__pAlredyHaveAccount {
+    @include font(14px, 16px, 400);
+
+    opacity: 50%;
+  }
+  &__btnLogin {
+    @include font(14px, 16px, 700);
+
+    text-decoration: none;
+    color: $softly-green;
+    margin-left: 6px;
+    padding-top: 13px;
+  }
+}

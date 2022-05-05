@@ -4,5 +4,16 @@
 body,
 html,
 #root {
+  @include size(100%);
   @extend %font;
+}
+
+body {
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+  overscroll-behavior: none;
+  margin: 0;
 }

@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
-import axios from 'axios';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
-import ArrowIcon from '../../icons/Arrow.icon';
-import './Login.style.scss';
+import { validateEmail, validatePassword } from '../../services/validators';
 import api from '../../api';
+
+import './Login.style.scss';
 
 type FormValues = {
   email?: string;
@@ -20,9 +21,6 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = (props) => {
   const [values, setValues] = useState<FormValues>({});
 
-  // const [userNamee, setUserName] = useState('');
-  // const [passwordd, setPassword] = useState('');
-
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -31,13 +29,6 @@ const Login: React.FC<LoginProps> = (props) => {
       const { email, password } = values;
 
       const { data } = await api.auth.login(email, password);
-
-      console.log(data);
-
-      // axios.post(``, { values }).then((res: any) => {
-      //   console.log(res);
-      //   console.log(res.data);
-      // });
     },
     [values],
   );
@@ -59,16 +50,18 @@ const Login: React.FC<LoginProps> = (props) => {
         className="sy-login__inputEmail"
         labelName="Email"
         placeholder="Contents"
+        validateFunction={validateEmail}
         onChange={(e) => {
           setValues((oldValues) => ({ ...oldValues, email: e.target.value }));
         }}
       ></Input>
       <Input
-        type="text"
+        type="password"
         name="password"
         className="sy-login__inputPassword"
         labelName="Password"
         placeholder="Contents"
+        validateFunction={validatePassword}
         onChange={(e) => {
           setValues((oldValues) => ({
             ...oldValues,
@@ -96,9 +89,9 @@ const Login: React.FC<LoginProps> = (props) => {
       </div>
       <div className="sy-login__btnSignUp_Text">
         Don't have an account yet?
-        <Button variant="link" className="sy-login__btnSignUp">
+        <Link to="/signup" className="sy-login__btnSignUp">
           Sign up
-        </Button>
+        </Link>
       </div>
     </form>
   );

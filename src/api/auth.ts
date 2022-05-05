@@ -7,6 +7,11 @@ async function login(email: string, password: string) {
   });
 }
 
-async function signup(params: any) {}
+async function signup(email: string, password: string) {
+  return httpClient.post('users/signup', {
+    email,
+    password,
+  });
+}
 
 export default { login, signup };
