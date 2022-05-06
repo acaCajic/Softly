@@ -1,0 +1,19 @@
+@use '../../scss/filesettings' as *;
+
+.verify {
+  @include flex(column, center, center);
+  @include size(min-content, 100%);
+
+  margin: 0 auto;
+
+  &__logo {
+    width: 210px;
+    height: 148px;
+    margin-bottom: 73px;
+  }
+  &__label-verify {
+    @include font(24px, 28px, 700);
+
+    margin-bottom: 87px;
+  }
+}
