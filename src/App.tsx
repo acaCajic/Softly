@@ -16,6 +16,7 @@ function App() {
         <Route path="signUp" element={<SignUp />} />
         <Route path="resetpassword" element={<ResetPassword />} />
         <Route path="verify" element={<Verify />} />
+
         <Route path="*" element={<p>not found page</p>} />
       </Routes>
     </BrowserRouter>

@@ -1,16 +1,21 @@
+import { LoginResponse } from '../models/Response';
+import { SignUpValues } from '../pages/SignUp/SignUp.componet';
 import httpClient from './httpClient';
 
 async function login(email: string, password: string) {
-  return httpClient.post('/users/signin', {
+  return httpClient.post<LoginResponse>('/users/signin', {
     email,
     password,
   });
 }
 
-async function signup(email: string, password: string) {
-  return httpClient.post('users/signup', {
+async function signup(data: SignUpValues) {
+  const { email, password, firstName, lastName } = data;
+  return httpClient.post('/users,/signup', {
     email,
     password,
+    firstName,
+    lastName,
   });
 }
 

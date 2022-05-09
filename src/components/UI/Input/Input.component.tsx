@@ -1,5 +1,12 @@
 import classNames from 'classnames';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import './Input.style.scss';
 
 type InputProps = {
@@ -15,7 +22,10 @@ type InputProps = {
   HTMLInputElement
 >;
 
-const Input: React.FC<InputProps> = (props) => {
+const Input: React.ForwardRefRenderFunction<
+  HTMLInputElement | null,
+  InputProps
+> = (props, ref) => {
   const {
     labelName,
     sufixNode,
@@ -51,12 +61,22 @@ const Input: React.FC<InputProps> = (props) => {
     [validateFunction, value],
   );
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div className={classes}>
       <label className="input__label">{labelName}</label>
       <div className="input__container">
         {prefixNode}
-        <input autoComplete="off" onChange={onChange} {...rest} />
+        <input
+          ref={(value) => {
+            (ref as Function)?.(value);
+            inputRef.current = value;
+          }}
+          autoComplete="off"
+          onChange={onChange}
+          {...rest}
+        />
         {sufixNode}
       </div>
       {(hasError || hasErrorState) && (
@@ -66,4 +86,4 @@ const Input: React.FC<InputProps> = (props) => {
   );
 };
 
-export default Input;
+export default forwardRef(Input);

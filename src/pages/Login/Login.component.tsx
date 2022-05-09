@@ -29,6 +29,9 @@ const Login: React.FC<LoginProps> = (props) => {
       const { email, password } = values;
 
       const { data } = await api.auth.login(email, password);
+
+      localStorage.setItem('token', data.accessToken);
+      localStorage.setItem('token1', 'joca_zmaj');
     },
     [values],
   );
@@ -61,7 +64,7 @@ const Login: React.FC<LoginProps> = (props) => {
         className="sy-login__inputPassword"
         labelName="Password"
         placeholder="Contents"
-        validateFunction={validatePassword}
+        //validateFunction={validatePassword}
         onChange={(e) => {
           setValues((oldValues) => ({
             ...oldValues,

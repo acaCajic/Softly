@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CheckBox from '../../components/UI/CheckBox';
 import Button from '../../components/UI/Button';
+import api from '../../api';
 import './SignUp.style.scss';
 import {
   validateEmail,
@@ -11,7 +12,9 @@ import {
   checkPassword,
 } from '../../services/validators';
 
-type SignUpValues = {
+export type SignUpValues = {
+  firstName?: string;
+  lastName?: string;
   email?: string;
   password?: string;
   repeatPassword?: string;
@@ -28,10 +31,11 @@ const SignUp: React.FC<SignUpProps> = (props) => {
       e.preventDefault();
       console.log(values);
 
-      const { email, password, repeatPassword } = values;
+      const { firstName, lastName, email, password } = values;
 
       if (!validateEmail(email)) return;
       console.log('ne radi');
+      const { data } = await api.auth.signup(values);
     },
     [values],
   );
@@ -45,6 +49,32 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         className="sy-signUp__logo"
       />
       <label className="sy-signUp__labelCreate">CREATE</label>
+
+      <Input
+        type="text"
+        name="firstName"
+        labelName="First Name"
+        placeholder="Contents"
+        className="sy-signUp__firstName"
+        onChange={(e) =>
+          setValues((oldValues) => ({
+            ...oldValues,
+            firstName: e.target.value,
+          }))
+        }
+      ></Input>
+
+      <Input
+        type="text"
+        name="lastName"
+        labelName="Last Name"
+        placeholder="Contents"
+        className="sy-signUp__lastName"
+        onChange={(e) =>
+          setValues((oldValues) => ({ ...oldValues, lastName: e.target.value }))
+        }
+      ></Input>
+
       <Input
         type="text"
         name="email"
@@ -56,6 +86,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
           setValues((oldValues) => ({ ...oldValues, email: e.target.value }))
         }
       ></Input>
+
       <Input
         type="password"
         name="password"
@@ -73,6 +104,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         labelName="Repeat Password"
         placeholder="Contents"
         className="sy-signUp__inputRepeatPassword"
+        errMsg="Incorect password"
         validateFunction={(value) => checkPassword(values.password, value)}
         onChange={(e) =>
           setValues((oldValues) => ({
