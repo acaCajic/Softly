@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
@@ -8,6 +8,7 @@ import { validateEmail, validatePassword } from '../../services/validators';
 import api from '../../api';
 
 import './Login.style.scss';
+import GeneralContext from '../../Providers/GeneralProvider/General.context';
 
 type FormValues = {
   email?: string;
@@ -19,24 +20,24 @@ type LoginProps = {
 };
 
 const Login: React.FC<LoginProps> = (props) => {
+  const { className, ...rest } = props;
   const [values, setValues] = useState<FormValues>({});
+  const { setUser } = useContext(GeneralContext);
+  const navigate = useNavigate();
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(values);
-
       const { email, password } = values;
-
       const { data } = await api.auth.login(email, password);
 
       localStorage.setItem('token', data.accessToken);
-      localStorage.setItem('token1', 'joca_zmaj');
+      setUser(data.user);
+      navigate({ pathname: '/home' });
     },
-    [values],
+    [navigate, setUser, values],
   );
 
-  const { className, ...rest } = props;
   return (
     <form onSubmit={handleSubmit} className="sy-login">
       <div className="sy-login__logo ">

@@ -6,19 +6,22 @@ import Catalog from './pages/Catalog';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import Verify from './pages/Verify';
+import GeneralProvider from './Providers/GeneralProvider';
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="home" element={<Home />} />
-        <Route path="catalog" element={<Catalog />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signUp" element={<SignUp />} />
-        <Route path="resetpassword" element={<ResetPassword />} />
-        <Route path="verify" element={<Verify />} />
+      <GeneralProvider>
+        <Routes>
+          <Route path="home" element={<Home />} />
+          <Route path="catalog" element={<Catalog />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signUp" element={<SignUp />} />
+          <Route path="resetpassword" element={<ResetPassword />} />
+          <Route path="verify" element={<Verify />} />
 
-        <Route path="*" element={<p>not found page</p>} />
-      </Routes>
+          <Route path="*" element={<p>not found page</p>} />
+        </Routes>
+      </GeneralProvider>
     </BrowserRouter>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { LoginResponse } from '../models/Response';
 import { SignUpValues } from '../pages/SignUp/SignUp.componet';
 import httpClient from './httpClient';
@@ -11,7 +12,7 @@ async function login(email: string, password: string) {
 
 async function signup(data: SignUpValues) {
   const { email, password, firstName, lastName } = data;
-  return httpClient.post('/users,/signup', {
+  return httpClient.post('/users/signup', {
     email,
     password,
     firstName,

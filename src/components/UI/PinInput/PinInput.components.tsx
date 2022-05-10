@@ -34,37 +34,45 @@ const PinInput: React.FC<PinInputProps> = (props) => {
     [numbers],
   );
 
-  console.log(activeIndex);
+  const [deletionActive, setDeletionActive] = useState<boolean>(false);
 
   const handleOnKeydown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       const { key } = event;
 
-      console.log('backspace');
-
       if (!allowedKeys.includes(key)) return;
+
+      setDeletionActive(true);
       setActiveIndex((oldIndex) => Math.max(0, oldIndex - 1));
     },
     [],
   );
+  console.log({ activeIndex, deletionActive });
 
   const handleInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const pinValue = event.target.value;
-
-      console.log('handle');
+      const pinValue = parseInt(event.target.value);
 
       setNumbers((oldNumbers) => {
         return oldNumbers.map((num, index) => {
-          console.log(index, activeIndex);
-          if (index === activeIndex) return parseInt(pinValue);
-          else return num;
+          if (deletionActive) {
+            if (index === activeIndex + 1)
+              return !isNaN(pinValue) ? pinValue : undefined;
+            else return num;
+          } else {
+            if (index === activeIndex)
+              return !isNaN(pinValue) ? pinValue : undefined;
+            else return num;
+          }
         });
       });
 
-      setActiveIndex((old) => Math.min(numOfPins - 1, old + 1));
+      if (!deletionActive)
+        setActiveIndex((old) => Math.min(numOfPins - 1, old + 1));
+
+      setDeletionActive(false);
     },
-    [activeIndex, numOfPins],
+    [activeIndex, deletionActive, numOfPins],
   );
   useEffect(() => {
     if (!inputRef.current && (activeIndex < 0 || activeIndex > numOfPins))
@@ -84,6 +92,7 @@ const PinInput: React.FC<PinInputProps> = (props) => {
           <input
             tabIndex={0}
             key={index}
+            value={numbers[index] || ''}
             ref={activeIndex === index ? inputRef : null}
             type="text"
             min={0}

@@ -6,8 +6,13 @@ body {
 
 .sy-login {
   @include flex(column, center, center);
+  @include size(min-content, 100%);
 
-  margin-top: 173px;
+  margin: 0 auto;
+
+  /*width: min-content;
+  margin: 0 auto;
+  margin-top: 173px;*/
 
   &__logo {
     @include size(210px, 150px);

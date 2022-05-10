@@ -1,16 +1,15 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import Input from '../../components/UI/Input';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CheckBox from '../../components/UI/CheckBox';
 import Button from '../../components/UI/Button';
 import api from '../../api';
+import { validateEmail, checkPassword } from '../../services/validators';
+import { useNavigate } from 'react-router-dom';
+
 import './SignUp.style.scss';
-import {
-  validateEmail,
-  validatePassword,
-  checkPassword,
-} from '../../services/validators';
+import GeneralContext from '../../Providers/GeneralProvider/General.context';
 
 export type SignUpValues = {
   firstName?: string;
@@ -26,6 +25,8 @@ type SignUpProps = {
 const SignUp: React.FC<SignUpProps> = (props) => {
   const [values, setValues] = useState<SignUpValues>({});
   const [errorRepeatPassword, setErrorRepeatPassword] = useState(false);
+  const { setUser } = useContext(GeneralContext);
+  const navigate = useNavigate();
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -36,6 +37,15 @@ const SignUp: React.FC<SignUpProps> = (props) => {
       if (!validateEmail(email)) return;
       console.log('ne radi');
       const { data } = await api.auth.signup(values);
+      localStorage.setItem('token', data.accessToken);
+      setUser({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      });
+      navigate({ pathname: '/home' });
+      console.log(data);
     },
     [values],
   );
@@ -93,7 +103,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         labelName="Password"
         placeholder="Contents"
         className="sy-signUp__inputPassword"
-        validateFunction={validatePassword}
+        //validateFunction={validatePassword}
         onChange={(e) =>
           setValues((oldValues) => ({ ...oldValues, password: e.target.value }))
         }

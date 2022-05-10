@@ -47,6 +47,7 @@ const Input: React.ForwardRefRenderFunction<
   );
 
   const [value, setValue] = useState<string>('');
+  const [touched, setTouched] = useState<boolean>(false);
 
   const onChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +58,9 @@ const Input: React.ForwardRefRenderFunction<
   );
 
   const hasErrorState = useMemo(
-    () => validateFunction && value !== '' && !validateFunction(value),
-    [validateFunction, value],
+    () =>
+      validateFunction && value !== '' && touched && !validateFunction(value),
+    [touched, validateFunction, value],
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,6 +77,7 @@ const Input: React.ForwardRefRenderFunction<
           }}
           autoComplete="off"
           onChange={onChange}
+          onBlur={() => setTouched(true)}
           {...rest}
         />
         {sufixNode}

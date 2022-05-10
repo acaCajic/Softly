@@ -6,11 +6,16 @@ body {
 
 .sy-signUp {
   @include flex(column, center, center);
+  //@include size(min-content, 100%);
+
+  //margin: 0 auto;
 
   width: min-content;
   margin: 0 auto;
 
-  margin-top: 173px;
+  padding: 174px 0 78px 0;
+
+  //margin-top: 173px;
 
   &__logo {
     width: 210px;
