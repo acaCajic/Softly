@@ -26,7 +26,7 @@ type SignUpProps = {
 const SignUp: React.FC<SignUpProps> = (props) => {
   const { className } = props;
 
-  const classes = classNames('sy-signUp', className);
+  const classes = classNames('sy-signup', className);
 
   const { setUser } = useContext(GeneralContext);
 
@@ -38,17 +38,12 @@ const SignUp: React.FC<SignUpProps> = (props) => {
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const { firstName, lastName, email, password } = values;
+      const { email } = values;
 
       if (!validateEmail(email)) return;
       const { data } = await api.auth.signup(values);
       localStorage.setItem('token', data.accessToken);
-      setUser({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      });
+      setUser(data.user);
       navigate({ pathname: '/home' });
     },
     [navigate, setUser, values],
@@ -59,16 +54,16 @@ const SignUp: React.FC<SignUpProps> = (props) => {
       <img
         src="/assets/images/logo.png"
         alt="signUp-logo"
-        className="sy-signUp__logo"
+        className="sy-signup__logo"
       />
-      <label className="sy-signUp__labelCreate">CREATE</label>
+      <label className="sy-signup__labelCreate">CREATE</label>
 
       <Input
         type="text"
         name="firstName"
         labelName="First Name"
         placeholder="Contents"
-        className="sy-signUp__firstName"
+        className="sy-signup__first-name"
         onChange={(e) =>
           setValues((oldValues) => ({
             ...oldValues,
@@ -82,7 +77,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         name="lastName"
         labelName="Last Name"
         placeholder="Contents"
-        className="sy-signUp__lastName"
+        className="sy-signup__last-name"
         onChange={(e) =>
           setValues((oldValues) => ({ ...oldValues, lastName: e.target.value }))
         }
@@ -93,7 +88,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         name="email"
         labelName="Email"
         placeholder="Contents"
-        className="sy-signUp__inputEmail"
+        className="sy-signup__input-email"
         validateFunction={validateEmail}
         onChange={(e) =>
           setValues((oldValues) => ({ ...oldValues, email: e.target.value }))
@@ -105,7 +100,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         name="password"
         labelName="Password"
         placeholder="Contents"
-        className="sy-signUp__inputPassword"
+        className="sy-signup__input-password"
         //validateFunction={validatePassword}
         onChange={(e) =>
           setValues((oldValues) => ({ ...oldValues, password: e.target.value }))
@@ -116,7 +111,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         name="repeatPassword"
         labelName="Repeat Password"
         placeholder="Contents"
-        className="sy-signUp__inputRepeatPassword"
+        className="sy-signup__input-repeat-password"
         errMsg="Incorect password"
         validateFunction={(value) => checkPassword(values.password, value)}
         onChange={(e) =>
@@ -126,23 +121,23 @@ const SignUp: React.FC<SignUpProps> = (props) => {
           }))
         }
       ></Input>
-      <div className="sy-signUp__checkBoxP">
+      <div className="sy-signup__checkbox-p">
         <CheckBox />
-        <p className="sy-signUp__p">
+        <p className="sy-signup__p">
           I hereby confirm that I have read and agree to the Terms & Conditions
           and Privacy Policy of Softly.
         </p>
       </div>
-      <div className="sy-signUp__btnGo">
+      <div className="sy-signup__btn-go">
         <Button type="submit" styleType="primary" variant="outline">
           GO
         </Button>
       </div>
-      <div className="sy-signUp__btnLoginP">
-        <p className="sy-signUp__pAlredyHaveAccount">
+      <div className="sy-signup__btn-login-p">
+        <p className="sy-signup__p-alredy-have-account">
           Already have an account?
         </p>
-        <Link to="/login" type="button" className="sy-signUp__btnLogin">
+        <Link to="/login" type="button" className="sy-signup__btn-login">
           Login
         </Link>
       </div>

@@ -4,13 +4,14 @@ import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
-import './ResetPassword.style.scss';
 import {
   checkPassword,
   validateEmail,
   validatePassword,
 } from '../../services/validators';
+import classNames from 'classnames';
+
+import './ResetPassword.style.scss';
 
 type ResetPasswordProps = {
   className?: string;
@@ -23,7 +24,8 @@ type ResetPasswordValue = {
 };
 const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
   const [value, setValue] = useState<ResetPasswordValue>({});
-  const { className, ...rest } = props;
+  const { className } = props;
+  const classes = classNames('sy-reset-password', className);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,8 +36,12 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="sy-reset-password">
-      <img src="assets/images/logo.png" className="sy-reset-password__logo" />
+    <form onSubmit={handleSubmit} className={classes}>
+      <img
+        src="assets/images/logo.png"
+        alt="logo"
+        className="sy-reset-password__logo"
+      />
       <label className="sy-reset-password__reset-label">RESET PASSWORD</label>
       <Input
         type="text"

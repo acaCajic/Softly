@@ -1,6 +1,6 @@
 @use '../../scss/filesettings' as *;
 
-.sy-signUp {
+.sy-signup {
   @include flex(column, center, center);
 
   width: min-content;
@@ -9,56 +9,60 @@
 
   &__logo {
     width: 210px;
-    height: 149px;
+    height: 150px;
   }
+
   &__labelCreate {
     @include font(24px, 28px, 700);
 
     margin-top: 74px;
     margin-bottom: 102px;
   }
-  &__firstName {
-    margin-bottom: 15px;
+
+  &__first-name,
+  &__last-name,
+  &__input-email,
+  &__input-password {
+    margin-bottom: 14px;
   }
-  &__lastName {
-    margin-bottom: 15px;
-  }
-  &__inputEmail {
-    margin-bottom: 15px;
-  }
-  &__inputPassword {
-    margin-bottom: 15px;
-  }
-  &__inputRepeatPassword {
+
+  &__input-repeat-password {
     margin-bottom: 24px;
   }
-  &__checkBoxP {
+
+  &__checkbox-p {
     @include flex(row);
   }
+
   &__p {
     margin-top: 4px;
     margin-bottom: 42px;
   }
-  &__btnGo {
+
+  &__btn-go {
     @include flex(row, right, center);
 
     width: 100%;
-    margin-bottom: 27px;
+    margin-bottom: 28px;
   }
-  &__btnLoginP {
+
+  &__btn-login-p {
     @include flex(row);
   }
-  &__pAlredyHaveAccount {
+
+  &__p-alredy-have-account {
     @include font(14px, 16px, 400);
 
-    opacity: 50%;
+    color: $softly-green;
+    opacity: 0.5;
   }
-  &__btnLogin {
+
+  &__btn-login {
     @include font(14px, 16px, 700);
 
     text-decoration: none;
     color: $softly-green;
     margin-left: 6px;
-    padding-top: 13px;
+    padding-top: 14px;
   }
 }

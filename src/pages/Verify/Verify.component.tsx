@@ -1,7 +1,6 @@
-import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import React, { useCallback } from 'react';
 import Button from '../../components/UI/Button';
-import Input from '../../components/UI/Input';
 import PinInput from '../../components/UI/PinInput';
 
 import './Verify.style.scss';
@@ -11,27 +10,31 @@ type VerifyProps = {
 };
 
 const Verify: React.FC<VerifyProps> = (props) => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
-  const [verificationNumber, setVerifica] = useState<number>();
+  const classes = classNames('verify', className);
 
   const verifyPinNumber = useCallback((value: number) => {
     console.log(value);
   }, []);
   return (
-    <form className="verify">
-      <img src="assets/images/logo.png" className="verify__logo" />
+    <form className={classes}>
+      <img src="assets/images/logo.png" alt="logo" className="verify__logo" />
       <label className="verify__label-verify">Verify</label>
-      <p>
+      <p className="verify__text-p">
         You should have recieved an email verifying your account, please enter
         the code below. Didn’t recieve it?{' '}
       </p>
       <div className="verify__resend-btn">
         <Button variant="link">Resend code.</Button>
       </div>
-      <div className="verify__inputs">
-        <PinInput numOfPins={5} onChange={verifyPinNumber}></PinInput>
-      </div>
+
+      <PinInput
+        className="verify__inputs"
+        numOfPins={5}
+        onChange={verifyPinNumber}
+      ></PinInput>
+
       <div className="verify__div-btn">
         <Button children="GO" styleType="primary" variant="outline" />
       </div>

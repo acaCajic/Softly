@@ -8,14 +8,9 @@ const Home = () => {
   const { logout } = useContext(GeneralContext);
   return (
     <div className="home-page">
-      <Button
-        onClick={() => {
-          logout();
-        }}
-        styleType="primary"
-        variant="outline"
-        children="logout"
-      ></Button>
+      <Button onClick={logout} styleType="primary" variant="outline">
+        logout
+      </Button>
     </div>
   );
 };

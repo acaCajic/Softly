@@ -15,6 +15,7 @@ type InputProps = {
   hasError?: boolean;
   errMsg?: string;
   className?: string;
+  onValidation?: (value: boolean) => void;
   validateFunction?: (value: string) => boolean;
 } & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -34,6 +35,7 @@ const Input: React.ForwardRefRenderFunction<
     disabled,
     errMsg = 'Invalid value',
     validateFunction,
+    onValidation,
     onChange: pOnChange,
     ...rest
   } = props;
@@ -56,11 +58,14 @@ const Input: React.ForwardRefRenderFunction<
     [pOnChange],
   );
 
-  const hasErrorState = useMemo(
-    () =>
-      validateFunction && value !== '' && touched && !validateFunction(value),
-    [touched, validateFunction, value],
-  );
+  const hasErrorState = useMemo(() => {
+    if (value !== '' && touched) {
+      const isValid = validateFunction ? validateFunction(value) : true;
+      onValidation?.(isValid);
+      return !isValid;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [touched, validateFunction, value]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 

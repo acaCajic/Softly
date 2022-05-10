@@ -1,58 +1,67 @@
 @use '../../scss/filesettings' as *;
 
-body {
-  background-color: $softly-cream;
-}
-
 .sy-login {
   @include flex(column, center, center);
   @include size(min-content, 100%);
 
   margin: 0 auto;
 
-  /*width: min-content;
-  margin: 0 auto;
-  margin-top: 173px;*/
-
   &__logo {
     @include size(210px, 150px);
 
-    margin-bottom: 73px;
+    margin-bottom: 74px;
   }
-  &__labelLogin {
+  &__label-login {
     @include font(24px, 28px, 700);
 
     color: black;
     margin-bottom: 76px;
   }
-  &__inputEmail {
-    margin-bottom: 15px;
+
+  &__input-email {
+    margin-bottom: 16px;
   }
-  &__inputPassword {
+
+  &__input-password {
     margin-bottom: 22px;
   }
-  &__checkBox_Label {
+
+  &__checkbox-label {
     @include flex(row);
   }
-  &__checkBoxAndLabel__checkBox {
-    margin-right: 73px;
+
+  &__checkbox-label__checkbox {
+    margin-right: 74px;
   }
-  &__btnForgotPassword {
+
+  &__btn-forgot-password {
     @include font(14px, 16px, 400);
+
+    color: $softly-green;
+    opacity: 0.5;
   }
-  &__btnSubmit {
+
+  &__btn-submit {
     @include flex(row, center, center);
 
     width: 100%;
     margin-top: 22px;
     margin-left: 156px;
   }
-  &__btnSignUp_Text {
+
+  &__btn-signup-text {
     @include flex(row);
+
     margin-top: 28px;
     margin-right: 34px;
+
+    > span {
+      color: $softly-green;
+      opacity: 0.5;
+    }
   }
-  &__btnSignUp {
+
+  &__btn-signup {
     @include font(14px, 16px, 700);
 
     text-decoration: none;
