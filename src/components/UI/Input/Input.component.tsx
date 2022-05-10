@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React, {
   forwardRef,
   useCallback,
-  useImperativeHandle,
   useMemo,
   useRef,
   useState,

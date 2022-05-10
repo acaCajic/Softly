@@ -1,14 +1,15 @@
 import React, { useCallback, useContext } from 'react';
 import { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
-import { validateEmail, validatePassword } from '../../services/validators';
+import { validateEmail } from '../../services/validators';
+import GeneralContext from '../../Providers/GeneralProvider/General.context';
+import classNames from 'classnames';
 import api from '../../api';
 
 import './Login.style.scss';
-import GeneralContext from '../../Providers/GeneralProvider/General.context';
 
 type FormValues = {
   email?: string;
@@ -20,7 +21,10 @@ type LoginProps = {
 };
 
 const Login: React.FC<LoginProps> = (props) => {
-  const { className, ...rest } = props;
+  const { className } = props;
+
+  const classes = classNames('sy-login', className);
+
   const [values, setValues] = useState<FormValues>({});
   const { setUser } = useContext(GeneralContext);
   const navigate = useNavigate();
@@ -39,7 +43,7 @@ const Login: React.FC<LoginProps> = (props) => {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="sy-login">
+    <form onSubmit={handleSubmit} className={classes}>
       <div className="sy-login__logo ">
         <img
           src="/assets/images/logo.png"

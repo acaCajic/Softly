@@ -7,6 +7,7 @@ import Button from '../../components/UI/Button';
 import api from '../../api';
 import { validateEmail, checkPassword } from '../../services/validators';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
 import './SignUp.style.scss';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
@@ -23,19 +24,23 @@ type SignUpProps = {
   className?: string;
 };
 const SignUp: React.FC<SignUpProps> = (props) => {
-  const [values, setValues] = useState<SignUpValues>({});
-  const [errorRepeatPassword, setErrorRepeatPassword] = useState(false);
+  const { className } = props;
+
+  const classes = classNames('sy-signUp', className);
+
   const { setUser } = useContext(GeneralContext);
+
+  const [values, setValues] = useState<SignUpValues>({});
+
   const navigate = useNavigate();
+
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(values);
 
       const { firstName, lastName, email, password } = values;
 
       if (!validateEmail(email)) return;
-      console.log('ne radi');
       const { data } = await api.auth.signup(values);
       localStorage.setItem('token', data.accessToken);
       setUser({
@@ -45,14 +50,12 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         password: password,
       });
       navigate({ pathname: '/home' });
-      console.log(data);
     },
-    [values],
+    [navigate, setUser, values],
   );
 
-  const { className, ...rest } = props;
   return (
-    <form onSubmit={handleSubmit} className="sy-signUp">
+    <form onSubmit={handleSubmit} className={classes}>
       <img
         src="/assets/images/logo.png"
         alt="signUp-logo"

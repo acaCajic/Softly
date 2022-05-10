@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, {
   useCallback,
   useEffect,
@@ -18,6 +19,8 @@ type PinInputProps = {
 
 const PinInput: React.FC<PinInputProps> = (props) => {
   const { numOfPins, className, onChange } = props;
+
+  const classes = classNames('pin-input', className);
 
   const digitArray = Array.from({ length: numOfPins }) as Array<
     number | undefined
@@ -86,7 +89,7 @@ const PinInput: React.FC<PinInputProps> = (props) => {
   }, [isVerificationReady, numbers, onChange]);
 
   return (
-    <div className="pin-input">
+    <div className={classes}>
       {digitArray.map((_, index) => {
         return (
           <input
