@@ -12,11 +12,11 @@
     height: 150px;
   }
 
-  &__labelCreate {
+  &__label-create {
     @include font(24px, 28px, 700);
 
     margin-top: 74px;
-    margin-bottom: 102px;
+    margin-bottom: 76px;
   }
 
   &__first-name,

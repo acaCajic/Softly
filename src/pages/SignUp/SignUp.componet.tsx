@@ -14,6 +14,7 @@ import { toastError } from '../../utils';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
 
 import './SignUp.style.scss';
+import './SignUp.style.responsive.scss';
 
 export type SignUpValues = {
   firstName?: string;
@@ -67,7 +68,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         alt="signUp-logo"
         className="sy-signup__logo"
       />
-      <label className="sy-signup__labelCreate">CREATE</label>
+      <label className="sy-signup__label-create">Sign Up</label>
 
       <Input
         type="text"

@@ -4,7 +4,7 @@
   @include size(100%);
   @include flex(row, center, center);
 
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

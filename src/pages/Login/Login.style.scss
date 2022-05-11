@@ -28,10 +28,13 @@
 
   &__checkbox-label {
     @include flex(row);
+
+    width: 100%;
+    padding: 0 10px;
   }
 
   &__checkbox-label__checkbox {
-    margin-right: 74px;
+    margin-right: auto;
   }
 
   &__btn-forgot-password {
@@ -42,11 +45,10 @@
   }
 
   &__btn-submit {
-    @include flex(row, center, center);
+    @include flex(row, flex-end, center);
 
     width: 100%;
     margin-top: 22px;
-    margin-left: 156px;
   }
 
   &__btn-signup-text {
@@ -68,5 +70,14 @@
     color: $softly-green;
     margin-left: 3px;
     padding-top: 4px;
+  }
+
+  @include mobile() {
+  }
+
+  @include phablet() {
+  }
+
+  @include desktop() {
   }
 }

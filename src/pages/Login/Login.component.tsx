@@ -16,6 +16,7 @@ import { AxiosError } from 'axios';
 import { toastError } from '../../utils';
 
 import './Login.style.scss';
+import './Login.style.responsive.scss';
 
 type FormValues = {
   email?: string;
