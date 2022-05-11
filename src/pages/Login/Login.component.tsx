@@ -1,13 +1,19 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
 import { validateEmail } from '../../services/validators';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Spinner from '../../components/UI/Spinner';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
 import classNames from 'classnames';
 import api from '../../api';
+import { AxiosError } from 'axios';
+import { toastError } from '../../utils';
 
 import './Login.style.scss';
 
@@ -26,6 +32,7 @@ const Login: React.FC<LoginProps> = (props) => {
   const classes = classNames('sy-login', className);
 
   const [values, setValues] = useState<FormValues>({});
+  const [loading, setLoading] = useState<boolean>(false);
   const { setUser } = useContext(GeneralContext);
   const navigate = useNavigate();
 
@@ -40,15 +47,24 @@ const Login: React.FC<LoginProps> = (props) => {
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (!isFormValid) return;
+      try {
+        e.preventDefault();
+        setLoading(true);
 
-      const { email, password } = values;
-      const { data } = await api.auth.login(email, password);
+        if (!isFormValid) return;
 
-      localStorage.setItem('token', data.accessToken);
-      setUser(data.user);
-      navigate({ pathname: '/home' });
+        const { email, password } = values;
+        const { data } = await api.auth.login(email, password);
+
+        setUser(data.user);
+        navigate({ pathname: '/home' });
+        localStorage.setItem('token', data.accessToken);
+      } catch (error) {
+        const err = error as AxiosError<{ message: string }>;
+        toastError(err);
+      } finally {
+        setLoading(false);
+      }
     },
     [isFormValid, navigate, setUser, values],
   );
@@ -120,6 +136,7 @@ const Login: React.FC<LoginProps> = (props) => {
         <Button type="submit" styleType="primary" variant="outline">
           Go
         </Button>
+        <ToastContainer />
       </div>
       <div className="sy-login__btn-signup-text">
         <span>Don't have an account yet?</span>
@@ -127,6 +144,7 @@ const Login: React.FC<LoginProps> = (props) => {
           Sign up
         </Link>
       </div>
+      {loading && <Spinner size="small" />}
     </form>
   );
 };

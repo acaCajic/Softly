@@ -1,5 +1,3 @@
-import react from 'react';
-
 type SVGProps = {
   className?: string;
 } & React.SVGProps<SVGSVGElement>;

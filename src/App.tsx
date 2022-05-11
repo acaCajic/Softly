@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import Verify from './pages/Verify';
 import GeneralProvider from './Providers/GeneralProvider';
+
 function App() {
   return (
     <BrowserRouter>

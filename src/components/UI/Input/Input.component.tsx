@@ -1,11 +1,5 @@
 import classNames from 'classnames';
-import React, {
-  forwardRef,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './Input.style.scss';
 
 type InputProps = {
@@ -22,10 +16,7 @@ type InputProps = {
   HTMLInputElement
 >;
 
-const Input: React.ForwardRefRenderFunction<
-  HTMLInputElement | null,
-  InputProps
-> = (props, ref) => {
+const Input: React.FC<InputProps> = (props) => {
   const {
     labelName,
     sufixNode,
@@ -58,16 +49,19 @@ const Input: React.ForwardRefRenderFunction<
     [pOnChange],
   );
 
+  const [isValid, setIsValid] = useState<boolean>(false);
+
   const hasErrorState = useMemo(() => {
     if (value !== '' && touched) {
       const isValid = validateFunction ? validateFunction(value) : true;
-      onValidation?.(isValid);
+      setIsValid(isValid);
       return !isValid;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [touched, validateFunction, value]);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    onValidation?.(isValid);
+  }, [isValid, onValidation]);
 
   return (
     <div className={classes}>
@@ -75,10 +69,6 @@ const Input: React.ForwardRefRenderFunction<
       <div className="input__container">
         {prefixNode}
         <input
-          ref={(value) => {
-            (ref as Function)?.(value);
-            inputRef.current = value;
-          }}
           autoComplete="off"
           onChange={onChange}
           onBlur={() => setTouched(true)}
@@ -93,4 +83,4 @@ const Input: React.ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(Input);
+export default Input;
