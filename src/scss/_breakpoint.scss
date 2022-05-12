@@ -2,6 +2,7 @@ $responsive-mobile: 480px;
 $responsive-phablet: 768px;
 $responsive-desktop: 1200px;
 $responsive-above-desktop: 1024px;
+$responsive-reduce-margin: 930px;
 
 @mixin mobile() {
   @media (max-width: $responsive-mobile) {
@@ -29,6 +30,12 @@ $responsive-above-desktop: 1024px;
 
 @mixin desktop() {
   @media screen and (min-width: $responsive-desktop) {
+    @content;
+  }
+}
+
+@mixin reduceMargin() {
+  @media screen and(max-width:$responsive-reduce-margin) {
     @content;
   }
 }

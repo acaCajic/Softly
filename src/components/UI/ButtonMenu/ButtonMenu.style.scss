@@ -1,0 +1,37 @@
+@use '../../../scss/filesettings' as *;
+
+.button-menu {
+  @include flex(column, center, center);
+  //display: block;
+
+  > :not(:last-child) {
+    margin-bottom: 12px;
+  }
+
+  &__line {
+    @include size(34px, 4px);
+
+    background-color: $softly-green;
+    margin: 0;
+    padding: 0;
+    // display: block;
+  }
+
+  &--open {
+    .button-menu__line[data-index='1'] {
+      display: none;
+    }
+
+    > :first-child {
+      // transform: translate(-10px) rotate(45deg);
+
+      transform: rotate(45deg) translate3d(10px, 0, 0) translateY(7px);
+    }
+
+    > :last-child {
+      // transform: rotate(-45deg) translateY(-20px);
+
+      transform: rotate(-45deg) translateY(-2px);
+    }
+  }
+}

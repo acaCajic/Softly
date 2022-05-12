@@ -1,0 +1,41 @@
+@use '../../scss/tools/tools' as *;
+
+.nav {
+  @include flex(row, start, center);
+
+  height: 130px;
+  flex-wrap: nowrap;
+
+  .button-menu {
+    display: none;
+  }
+
+  &__logo {
+    @include size(90px, 64);
+
+    padding-left: 54px;
+  }
+
+  &__items {
+    margin: 0 auto;
+
+    flex-grow: 1;
+    //justify-content: space-evenly;
+  }
+
+  &__item {
+    @include font(18px, 22px, 800);
+
+    margin-left: 146px;
+    text-decoration: none;
+    color: black;
+  }
+
+  &__logout {
+    @include font(24px, 30px, 700);
+
+    margin-right: 64px;
+    padding-left: 10px;
+    border-bottom: 4px solid #c9b1a9;
+  }
+}
