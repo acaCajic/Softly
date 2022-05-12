@@ -1,4 +1,4 @@
-@use '../../scss/tools/tools' as *;
+@use '../../scss/filesettings' as *;
 
 .nav {
   @include flex(row, start, center);
@@ -17,15 +17,18 @@
   }
 
   &__items {
+    @include flex(row,flex-start,center);
+   
     margin: 0 auto;
-
     flex-grow: 1;
-    //justify-content: space-evenly;
+    list-style-type: none;
+    height:100%;
   }
 
   &__item {
     @include font(18px, 22px, 800);
 
+    height:100%;
     margin-left: 146px;
     text-decoration: none;
     color: black;
@@ -37,5 +40,11 @@
     margin-right: 64px;
     padding-left: 10px;
     border-bottom: 4px solid #c9b1a9;
+  }
+
+  &__bottom-line{
+    @include size(100%,10px);
+
+    background-color: $softly-green;
   }
 }

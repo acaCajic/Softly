@@ -1,10 +1,10 @@
-@use '../../scss/tools/tools' as *;
 @use '../../scss/filesettings' as *;
 
 .nav {
-  @include flex(row, top, center);
+  //@include flex(row, top, center);
+  position: relative;
 
-  flex-wrap: nowrap;
+  
 
   @include phablet() {
     .button-menu {
@@ -17,7 +17,41 @@
     }
 
     &__items {
-      display: none;
+      display:flex;
+      flex-direction: column;
+      width:100%;
+      height:500px;
+      position: absolute;
+      top:130px;
+      left:-100%;
+      opacity: 1;
+      transition: all 0.5 ease;
+    }
+
+    &__items-active{
+      @include flex(column,center,center);
+
+      position: absolute;
+      width:100%;
+      top:120px;
+      background:silver;
+      list-style: none;
+      left:0;
+      opacity:0.8;
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+
+    &__link{
+      width:100%;
+      justify-content: center;
+    }
+
+    &__item{
+      text-align: center;
+      padding: 2px;
+      width: 100%;
+      display: table;
     }
 
     &__logout {
