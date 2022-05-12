@@ -1,0 +1,68 @@
+@use '../../scss/filesettings' as *;
+
+.sy-signup {
+  @include flex(column, center, center);
+
+  width: min-content;
+  margin: 0 auto;
+  padding: 174px 0 78px 0;
+
+  &__logo {
+    width: 210px;
+    height: 150px;
+  }
+
+  &__label-create {
+    @include font(24px, 28px, 700);
+
+    margin-top: 74px;
+    margin-bottom: 76px;
+  }
+
+  &__first-name,
+  &__last-name,
+  &__input-email,
+  &__input-password {
+    margin-bottom: 14px;
+  }
+
+  &__input-repeat-password {
+    margin-bottom: 24px;
+  }
+
+  &__checkbox-p {
+    @include flex(row);
+  }
+
+  &__p {
+    margin-top: 4px;
+    margin-bottom: 42px;
+  }
+
+  &__btn-go {
+    @include flex(row, right, center);
+
+    width: 100%;
+    margin-bottom: 28px;
+  }
+
+  &__btn-login-p {
+    @include flex(row);
+  }
+
+  &__p-alredy-have-account {
+    @include font(14px, 16px, 400);
+
+    color: $softly-green;
+    opacity: 0.5;
+  }
+
+  &__btn-login {
+    @include font(14px, 16px, 700);
+
+    text-decoration: none;
+    color: $softly-green;
+    margin-left: 6px;
+    padding-top: 2px;
+  }
+}

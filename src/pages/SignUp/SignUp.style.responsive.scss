@@ -1,0 +1,16 @@
+@use '../../scss/filesettings' as *;
+
+.sy-signup {
+  @include flex(column, center, center);
+
+  @include mobile() {
+    &__label-create {
+      margin-bottom: 56px;
+
+      border-bottom: 4px solid #c9b1a9;
+      width: fit-content;
+      margin-right: auto;
+      padding-right: 12px;
+    }
+  }
+}

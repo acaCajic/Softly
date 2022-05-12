@@ -1,0 +1,13 @@
+@use '../../../scss/filesettings' as *;
+
+.pin-input {
+  @include flex(row);
+
+  &__one-input {
+    @include size(44px, 44px);
+
+    margin-right: 18px;
+    border: 1px solid $softly-green;
+    border-radius: 4px;
+  }
+}

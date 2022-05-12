@@ -5,6 +5,13 @@
 
   width: 304px;
 
+  &__error-label {
+    margin: 0;
+    color: $negative;
+    padding-left: 12px;
+    font-size: 12px;
+  }
+
   &__label {
     @include font(18px, 22px, 400);
 
@@ -13,8 +20,12 @@
   }
 
   &--error {
+    .input__container {
+      border-color: $negative;
+    }
   }
   &--disable {
+    opacity: 0.5;
   }
 
   &__container {

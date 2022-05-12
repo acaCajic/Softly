@@ -4,5 +4,17 @@
 body,
 html,
 #root {
+  @include size(100%);
   @extend %font;
+}
+
+body {
+  &,
+  * {
+    box-sizing: border-box;
+  }
+  background-color: $softly-cream;
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  margin: 0;
 }

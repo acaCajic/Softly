@@ -1,0 +1,34 @@
+$responsive-mobile: 480px;
+$responsive-phablet: 768px;
+$responsive-desktop: 1200px;
+$responsive-above-desktop: 1024px;
+
+@mixin mobile() {
+  @media (max-width: $responsive-mobile) {
+    @content;
+  }
+}
+
+@mixin above-mobile() {
+  @media (min-width: $responsive-mobile) {
+    @content;
+  }
+}
+
+@mixin phablet() {
+  @media (max-width: $responsive-phablet) {
+    @content;
+  }
+}
+
+@mixin above-phablet() {
+  @media (min-width: $responsive-phablet) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media screen and (min-width: $responsive-desktop) {
+    @content;
+  }
+}

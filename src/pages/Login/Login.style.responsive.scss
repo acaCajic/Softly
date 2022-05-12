@@ -1,0 +1,16 @@
+@use '../../scss/filesettings' as *;
+
+.sy-login {
+  @include phablet() {
+  }
+  @include mobile() {
+    padding-top: 162px;
+
+    &__label-login {
+      border-bottom: 4px solid #c9b1a9;
+      width: fit-content;
+      margin-right: auto;
+      padding-right: 12px;
+    }
+  }
+}

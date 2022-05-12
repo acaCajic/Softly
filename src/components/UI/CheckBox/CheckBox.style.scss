@@ -1,13 +1,40 @@
 @use '../../../scss/filesettings' as *;
 
 .checkbox {
+  @include flex(row);
+
+  cursor: pointer;
+
+  > :not(:first-child, :nth-child(2)) {
+    margin-left: 8px;
+  }
+
   &__label {
     @include font(14px, 18px, 400);
+
+    user-select: none;
   }
+
+  &__check {
+    @include flex(row, center, center);
+    @include size(14px);
+
+    border: 1px solid black;
+    border-radius: 4px;
+
+    svg {
+      @include size(100%);
+
+      fill-opacity: 0;
+      transition: fill-opacity 150ms ease-in-out;
+    }
+  }
+
   &--set {
-    background-color: green;
-  }
-  &--unSet {
-    background-color: red;
+    .checkbox__check {
+      svg {
+        fill-opacity: 1;
+      }
+    }
   }
 }

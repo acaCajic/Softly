@@ -1,0 +1,75 @@
+@use '../../../scss/filesettings' as *;
+
+.spinner {
+  @include size(100%);
+  @include flex(row, center, center);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($softly-cream, 0.7);
+
+  &::before {
+    @include size(48px);
+
+    content: '';
+    border-radius: 50%;
+    opacity: 0.8;
+    border: 2px solid $softly-green;
+    border-bottom: 2px solid transparent;
+    animation: spinner 400ms linear infinite;
+  }
+
+  &--small {
+    &::before {
+      @include size(24px);
+
+      opacity: 0.8;
+    }
+  }
+
+  &--medium {
+    &::before {
+      @include size(48px);
+
+      opacity: 0.8;
+    }
+  }
+
+  &--large {
+    &::before {
+      @include size(24px);
+
+      opacity: 0.8;
+    }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// @keyframes spinner {
+//   0%,
+//   100% {
+//     animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+//   }
+//   0% {
+//     transform: rotateY(0deg);
+//   }
+//   50% {
+//     transform: rotateY(1800deg);
+//     animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+//   }
+//   100% {
+//     transform: rotateY(3600deg);
+//   }
+// }

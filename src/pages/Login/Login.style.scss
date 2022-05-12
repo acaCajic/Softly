@@ -1,0 +1,83 @@
+@use '../../scss/filesettings' as *;
+
+.sy-login {
+  @include flex(column, center, center);
+  @include size(min-content, 100%);
+
+  margin: 0 auto;
+
+  &__logo {
+    @include size(210px, 150px);
+
+    margin-bottom: 74px;
+  }
+  &__label-login {
+    @include font(24px, 28px, 700);
+
+    color: black;
+    margin-bottom: 76px;
+  }
+
+  &__input-email {
+    margin-bottom: 16px;
+  }
+
+  &__input-password {
+    margin-bottom: 22px;
+  }
+
+  &__checkbox-label {
+    @include flex(row);
+
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  &__checkbox-label__checkbox {
+    margin-right: auto;
+  }
+
+  &__btn-forgot-password {
+    @include font(14px, 16px, 400);
+
+    color: $softly-green;
+    opacity: 0.5;
+  }
+
+  &__btn-submit {
+    @include flex(row, flex-end, center);
+
+    width: 100%;
+    margin-top: 22px;
+  }
+
+  &__btn-signup-text {
+    @include flex(row);
+
+    margin-top: 28px;
+    margin-right: 34px;
+
+    > span {
+      color: $softly-green;
+      opacity: 0.5;
+    }
+  }
+
+  &__btn-signup {
+    @include font(14px, 16px, 700);
+
+    text-decoration: none;
+    color: $softly-green;
+    margin-left: 3px;
+    padding-top: 4px;
+  }
+
+  @include mobile() {
+  }
+
+  @include phablet() {
+  }
+
+  @include desktop() {
+  }
+}

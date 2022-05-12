@@ -30,6 +30,10 @@
     background-color: $softly-cream;
   }
   &--link {
+    background-color: transparent;
+    width: fit-content;
+    height: auto;
+    font-family: Bodoni;
   }
   &--secondary {
     color: red;

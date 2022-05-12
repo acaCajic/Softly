@@ -1,0 +1,49 @@
+@use '../../scss/filesettings' as *;
+
+.verify {
+  @include flex(column, center, center);
+  @include size(min-content, 100%);
+
+  margin: 0 auto;
+
+  &__logo {
+    width: 210px;
+    height: 148px;
+    margin-bottom: 73px;
+  }
+
+  &__label-verify {
+    @include font(24px, 28px, 700);
+
+    margin-bottom: 87px;
+  }
+
+  &__text-p {
+    margin: 0 0;
+  }
+
+  &__resend-btn {
+    @include flex(row, left, center);
+
+    width: 100%;
+    margin-bottom: 40px;
+    color: $softly-green;
+  }
+
+  &__inputs {
+    @include flex(row);
+
+    margin-bottom: 70px;
+  }
+
+  &__input-1 {
+    @include size(44px, 44px);
+    margin-right: 18px;
+  }
+
+  &__div-btn {
+    @include flex(row, right, center);
+
+    width: 100%;
+  }
+}
