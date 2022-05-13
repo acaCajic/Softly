@@ -6,7 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
-import { validateEmail } from '../../services/validators';
+import {
+  composeValidators,
+  required,
+  validateEmail,
+  validatePassword,
+} from '../../services/validators';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from '../../components/UI/Spinner';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
@@ -17,6 +22,9 @@ import { toastError } from '../../utils';
 
 import './Login.style.scss';
 import './Login.style.responsive.scss';
+import Field from '../../components/FormWrapper/components/Field';
+import FormWrapper from '../../components/FormWrapper';
+import InputField from '../../components/Fields/InputField';
 
 type FormValues = {
   email?: string;
@@ -37,22 +45,19 @@ const Login: React.FC<LoginProps> = (props) => {
   const { setUser } = useContext(GeneralContext);
   const navigate = useNavigate();
 
-  const [validationMap, setValidationMap] = useState<
-    Record<keyof FormValues, boolean>
-  >({ email: false, password: false });
+  // const [validationMap, setValidationMap] = useState<
+  //   Record<keyof FormValues, boolean>
+  // >({ email: false, password: false });
 
-  const isFormValid = useMemo(
-    () => Object.values(validationMap).every((data) => data),
-    [validationMap],
-  );
+  // const isFormValid = useMemo(
+  //   () => Object.values(validationMap).every((data) => data),
+  //   [validationMap],
+  // );
 
   const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
+    async (e: FormValues) => {
       try {
-        e.preventDefault();
         setLoading(true);
-
-        if (!isFormValid) return;
 
         const { email, password } = values;
         const { data } = await api.auth.login(email, password);
@@ -67,11 +72,11 @@ const Login: React.FC<LoginProps> = (props) => {
         setLoading(false);
       }
     },
-    [isFormValid, navigate, setUser, values],
+    [navigate, setUser, values],
   );
 
   return (
-    <form onSubmit={handleSubmit} className={classes}>
+    <FormWrapper<FormValues> onSubmit={handleSubmit} className={classes}>
       <div className="sy-login__logo ">
         <img
           src="/assets/images/logo.png"
@@ -80,7 +85,31 @@ const Login: React.FC<LoginProps> = (props) => {
         />
       </div>
       <label className="sy-login__label-login">LOGIN</label>
-      <Input
+      <Field
+        name="email"
+        component={InputField}
+        type="email"
+        className="sy-login__input-email"
+        labelName="Email"
+        placeholder="Contents"
+        validate={composeValidators(
+          required('This field is required'),
+          validateEmail('Email is not valid'),
+        )}
+      />
+      <Field
+        name="password"
+        component={InputField}
+        type="password"
+        className="sy-login__input-password"
+        labelName="Password"
+        placeholder="Contents"
+        validate={composeValidators(
+          required('This field is required'),
+          validatePassword('Password is not valid'),
+        )}
+      />
+      {/* <Input
         type="email"
         name="email"
         className="sy-login__input-email"
@@ -98,8 +127,8 @@ const Login: React.FC<LoginProps> = (props) => {
         onChange={(e) => {
           setValues((oldValues) => ({ ...oldValues, email: e.target.value }));
         }}
-      ></Input>
-      <Input
+      ></Input> */}
+      {/* <Input
         type="password"
         name="password"
         className="sy-login__input-password"
@@ -119,7 +148,7 @@ const Login: React.FC<LoginProps> = (props) => {
             password: e.target.value,
           }));
         }}
-      />
+      /> */}
       <div className="sy-login__checkbox-label">
         <CheckBox
           className="sy-login__checkbox-label__checkbox"
@@ -146,7 +175,7 @@ const Login: React.FC<LoginProps> = (props) => {
         </Link>
       </div>
       {loading && <Spinner size="small" />}
-    </form>
+    </FormWrapper>
   );
 };
 

@@ -1,64 +1,63 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import ButtonMenu from '../UI/ButtonMenu';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import './NavBar.style.scss';
 import './NavBar.responsive.style.scss';
-import { useEffect } from 'react';
 
 type NavBarProps = {
   className?: string;
 };
 
 const navItems = [
-  { title: 'ABOUT' },
-  { title: 'AUCTIONS' },
-  { title: 'EXPERIENCES' },
+  { title: 'ABOUT', to: '/about' },
+  { title: 'AUCTIONS', to: '/auctions' },
+  { title: 'EXPERIENCES', to: '/experiences' },
 ];
 
 const NavBar: React.FC<NavBarProps> = (props) => {
   const { className } = props;
   const [btnIsOpen, setBtnIsOpen] = useState<boolean>(false);
 
-  const updateBtn =() =>{
-    if(window.innerWidth>760)
-    setBtnIsOpen(false);
-  }
+  const classes = classNames('sy-nav', className);
 
- useEffect(() => {
-   //if(window.innerWidth > 760)
-    //setBtnIsOpen(false);
-    window.addEventListener("resize", updateBtn);
-    console.log(window.innerWidth);
- },[]);
-  const classes = classNames('nav', className);
+  const renderNavLinks = useMemo(
+    () =>
+      navItems.map((item, index) => {
+        return (
+          <Link to={item.to} key={index} className="sy-nav__link">
+            {item.title}
+          </Link>
+        );
+      }),
+    [],
+  );
 
   return (
     <div className={classes}>
-      <img src="/assets/images/logo.png" alt="logo" className="nav__logo" />
-      
-        <ul className={btnIsOpen ? 'nav__items-active' : 'nav__items'  }>
-          {navItems.map((item, index) => {
-            return (
-              <li key={index} className="nav__link"><a  href="/" className="nav__item">
-                {item.title}
-              </a>
-              </li>
-            );
-          })}
-        </ul>
-      
-      <label className="nav__logout">Logout</label>
+      <img src="/assets/images/logo.png" alt="logo" className="sy-nav__logo" />
+
+      <aside
+        className={classNames('sy-nav__sidedrawer', {
+          'sy-nav__sidedrawer--active': btnIsOpen,
+        })}
+      >
+        {renderNavLinks}
+      </aside>
+
+      <div className={classNames('sy-nav__items')}>{renderNavLinks}</div>
+
+      <label className="sy-nav__logout">Logout</label>
       <ButtonMenu
         btnOpen={btnIsOpen}
         onClick={() => {
           setBtnIsOpen(!btnIsOpen);
         }}
       />
-      <div className='nav__bottom-line'></div>
     </div>
-    
   );
 };
 

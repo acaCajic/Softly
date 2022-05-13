@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Footer from '../../components/Footer';
 import NavBar from '../../components/NavBar';
 import Button from '../../components/UI/Button';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
@@ -18,6 +19,7 @@ const Home = () => {
       >
         logout
       </Button>
+      <Footer></Footer>
     </div>
   );
 };

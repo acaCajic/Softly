@@ -1,0 +1,15 @@
+@use '../../scss/filesettings' as *;
+
+.footer {
+  @include flex(row, center);
+
+  @include phablet {
+    padding-left: 88px;
+    padding-right: 88px;
+  }
+
+  @include mobile {
+    padding-left: 50px;
+    padding-right: 34px;
+  }
+}

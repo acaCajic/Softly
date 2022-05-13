@@ -1,37 +1,45 @@
 @use '../../../scss/filesettings' as *;
+@use 'sass:math';
 
 .button-menu {
-  @include flex(column, center, center);
-  //display: block;
+  @include flex(column);
+  @include size(30px, fit-content);
+
+  $yOffset: 6px;
+  $barHeight: 2px;
+
+  position: relative;
+  padding: 0px;
 
   > :not(:last-child) {
-    margin-bottom: 12px;
+    margin-bottom: $yOffset;
   }
 
   &__line {
-    @include size(34px, 4px);
+    width: 100%;
+    height: $barHeight;
 
-    background-color: $softly-green;
     margin: 0;
     padding: 0;
-    // display: block;
+    background-color: $softly-green;
+    transition-property: opacity transform;
+    transition-timing-function: ease-in-out;
+    transition-duration: 300ms;
   }
 
   &--open {
-    .button-menu__line[data-index='1'] {
-      display: none;
+    $topCenter: calc($barHeight + $yOffset);
+
+    span:nth-child(1) {
+      transform: translate3d(0, $topCenter, 0) rotate3d(0, 0, 1, 45deg);
     }
 
-    > :first-child {
-      // transform: translate(-10px) rotate(45deg);
-
-      transform: rotate(45deg) translate3d(10px, 0, 0) translateY(7px);
+    span:nth-child(2) {
+      opacity: 0;
     }
 
-    > :last-child {
-      // transform: rotate(-45deg) translateY(-20px);
-
-      transform: rotate(-45deg) translateY(-2px);
+    span:nth-child(3) {
+      transform: translate3d(0, -#{$topCenter}, 0) rotate3d(0, 0, -1, 45deg);
     }
   }
 }

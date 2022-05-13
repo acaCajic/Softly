@@ -1,0 +1,91 @@
+@use '../../scss/filesettings' as *;
+
+.footer {
+  @include flex(row, center);
+
+  background-color: $softly-dusty-rose;
+  padding-left: 355px;
+  padding-right: 355px;
+  padding-top: 36px;
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 250px;
+
+  p {
+    color: $softly-cream;
+  }
+  ul {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    color: $softly-cream;
+  }
+
+  &__first-column {
+    @include flex(column);
+
+    margin-right: auto;
+    //position: absolute;
+    //left: 24.65%;
+
+    &__softly {
+      @include flex(column, flex-start, center);
+
+      margin-right: auto;
+      // position: absolute;
+      // left: 24.65%;
+      //width: 100%;
+      text-align: left;
+    }
+
+    &__softly-p {
+      @include font(24px, 28px, 400);
+
+      width: 100%;
+    }
+
+    &__contact {
+      @include flex(column, flex-start, center);
+    }
+
+    &__contact-p {
+      @include font(24px, 28px, 400);
+
+      width: 100%;
+    }
+
+    &__contact-p-88 {
+      width: 100%;
+    }
+  }
+
+  &__second-column {
+    @include flex(column);
+    flex-grow: 0.34;
+    // position: absolute;
+    //left: 47.15%;
+    // margin-right: auto;
+    &__social-network-ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    &__social-network-li {
+      list-style: none;
+      width: 100%;
+    }
+    a {
+      color: $softly-cream;
+      text-decoration: none;
+    }
+  }
+
+  &__third-column {
+    @include flex(column, flex-start, center);
+    flex-grow: 0.33;
+    // margin-right: auto;
+  }
+}
