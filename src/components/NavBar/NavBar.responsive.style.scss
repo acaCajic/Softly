@@ -48,8 +48,17 @@
     }
 
     &__link {
+      @include flex(row,center);
+
       width: 100%;
-      justify-content: center;
+      padding-left: 0;
+
+       
+    }
+
+    &__link:hover{
+      background-color:$softly-cream;
+      cursor:pointer;
     }
 
     &__item {

@@ -12,4 +12,9 @@
     padding-left: 50px;
     padding-right: 34px;
   }
+
+  @include reduceFooterPadding{
+    padding-left: 150px;
+    padding-right: 150px;
+  }
 }

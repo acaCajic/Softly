@@ -12,9 +12,11 @@
 
   &__link {
     @include font(18px, 22px, 800);
+    
     padding-left: 146px;
     text-decoration: none;
     color: black;
+    
   }
 
   &__logo {

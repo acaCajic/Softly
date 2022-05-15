@@ -3,6 +3,7 @@ $responsive-phablet: 768px;
 $responsive-desktop: 1200px;
 $responsive-above-desktop: 1024px;
 $responsive-reduce-margin: 930px;
+$responsive-reduce-padding-footer:1150px;
 
 @mixin mobile() {
   @media (max-width: $responsive-mobile) {
@@ -38,4 +39,10 @@ $responsive-reduce-margin: 930px;
   @media screen and(max-width:$responsive-reduce-margin) {
     @content;
   }
+}
+
+@mixin reduceFooterPadding(){
+@media screen and (max-width:$responsive-reduce-padding-footer){
+  @content;
+}
 }
