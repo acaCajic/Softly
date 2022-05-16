@@ -25,7 +25,7 @@
   }
 
   &__first-column {
-    @include flex(column,start);
+    @include flex(column, start);
 
     margin-right: auto;
     //position: absolute;
@@ -68,6 +68,10 @@
     // position: absolute;
     //left: 47.15%;
     // margin-right: auto;
+    &__follow-us {
+      @include font(24px, 28px, 400);
+    }
+
     &__social-network-ul {
       list-style: none;
       padding-left: 0;
@@ -86,6 +90,10 @@
   &__third-column {
     @include flex(column, flex-start, center);
     flex-grow: 0.33;
+
+    &__legal {
+      @include font(24px, 28px, 400);
+    }
     // margin-right: auto;
   }
 }

@@ -104,10 +104,10 @@ const Login: React.FC<LoginProps> = (props) => {
         className="sy-login__input-password"
         labelName="Password"
         placeholder="Contents"
-        validate={composeValidators(
+        /*  validate={composeValidators(
           required('This field is required'),
           validatePassword('Password is not valid'),
-        )}
+        )}*/
       />
       {/* <Input
         type="email"

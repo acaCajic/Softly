@@ -41,7 +41,7 @@ const Footer: React.FC<FooterProps> = (props) => {
         </div>
       </div>
       <div className="footer__second-column">
-        <p>Follow Us</p>
+        <p className="footer__second-column__follow-us">Follow Us</p>
         <ul className="footer__second-column__social-network-ul">
           {socialNetworks.map((item, index) => {
             return (
@@ -56,7 +56,7 @@ const Footer: React.FC<FooterProps> = (props) => {
         </ul>
       </div>
       <div className="footer__third-column">
-        <p>Legal</p>
+        <p className="footer__third-column__legal">Legal</p>
         <ul className="footer__third-column__legal-items">
           {legalItems.map((item, index) => {
             return (
