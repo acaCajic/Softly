@@ -1,0 +1,52 @@
+@use '../../scss/filesettings' as *;
+
+.footer {
+  @include flex(row, center);
+
+  @include phablet {
+    &__container {
+      @include flex-gap(80px, row);
+    }
+  }
+
+  @include mobile {
+    height: 220px;
+    padding: 20px;
+
+    &__container {
+      @include flex-gap(24px, row);
+    }
+
+    &__first-column {
+      &__softly-p,
+      &__contact-p {
+        @include font(18px, 22px, 400);
+      }
+
+      &__contact-mon,
+      &__contact-p-88,
+      &__softly-abn {
+        @include font(12px, 30px, 400);
+      }
+    }
+
+    &__second-column {
+      &__follow-us {
+        @include font(18px, 22px, 400);
+      }
+      &__social-network-li {
+        @include font(12px, 30px, 400);
+      }
+    }
+
+    &__third-column {
+      &__legal {
+        @include font(18px, 22px, 400);
+      }
+
+      &__legal-items-li {
+        @include font(12px, 30px, 400);
+      }
+    }
+  }
+}

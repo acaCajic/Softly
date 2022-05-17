@@ -1,0 +1,79 @@
+@use '../../scss/filesettings' as *;
+
+.sy-nav {
+  @include flex(row, flex-start, center);
+
+  height: 130px;
+  border-bottom: 10px solid $softly-green;
+
+  .button-menu {
+    display: none;
+  }
+
+  &__link {
+    @include font(18px, 22px, 800);
+
+    text-decoration: none;
+    color: black;
+
+    &--active {
+      color: rgba(black, 0.5);
+    }
+  }
+
+  &__link:hover {
+    color: $softly-green;
+  }
+
+  &__logo {
+    @include size(90px, 64px);
+
+    margin-left: 54px;
+  }
+  &__logo-side-menu {
+    @include size(90px, 64px);
+
+    margin-bottom: 40px;
+  }
+
+  &__sidedrawer,
+  &__items {
+    > [class*='link']:not(:last-of-type) {
+      margin-right: 148px;
+    }
+  }
+
+  &__sidedrawer {
+    display: none;
+  }
+
+  &__items {
+    @include flex(row, flex-start, center);
+
+    margin: 0 auto;
+    flex-grow: 1;
+    list-style-type: none;
+    width: 100%;
+    padding-left: 146px;
+  }
+
+  &__item {
+    @include font(18px, 22px, 800);
+
+    height: 100%;
+    margin-left: 146px;
+    text-decoration: none;
+    color: black;
+  }
+
+  &__logout[class] {
+    @include font(24px, 28px, 700);
+
+    width: fit-content;
+    padding: 0 0 4px 24px;
+    border-bottom: 4px solid #c9b1a9;
+    font-family: Bodoni;
+    margin-right: 54px;
+    border-radius: 0px;
+  }
+}

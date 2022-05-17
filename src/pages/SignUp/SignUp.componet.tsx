@@ -101,7 +101,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         labelName="Email"
         placeholder="Contents"
         className="sy-signup__input-email"
-        validateFunction={validateEmail}
+        // validateFunction={validateEmail}
         onChange={(e) =>
           setValues((oldValues) => ({ ...oldValues, email: e.target.value }))
         }

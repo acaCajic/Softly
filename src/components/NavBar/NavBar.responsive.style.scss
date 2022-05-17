@@ -1,0 +1,98 @@
+@use '../../scss/filesettings' as *;
+
+.sy-nav {
+  @include above-desktop() {
+    &__items {
+      > [class*='link']:not(:last-child) {
+        margin-right: 40px;
+      }
+    }
+  }
+  @include phablet() {
+    .button-menu {
+      display: flex;
+      cursor: pointer;
+      margin-right: 32px;
+    }
+
+    &__sidedrawer {
+      @include flex(column, flex-start, center);
+
+      transform: translate3d(-100%, 0, 0);
+      transition: transform 300ms ease-in-out;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      min-width: 240px;
+      z-index: 10;
+      background-color: $softly-dusty-rose;
+      padding: 24px 0;
+
+      &--active {
+        transform: translate3d(0, 0, 0);
+      }
+
+      > [class*='link']:not(:last-of-type) {
+        margin: 0 auto;
+      }
+    }
+
+    &__logo {
+      margin-left: 24px;
+    }
+
+    &__items {
+      display: none;
+    }
+
+    &__items-active {
+      @include flex(column, center, center);
+
+      position: absolute;
+      width: 100%;
+      top: 120px;
+      background: silver;
+      list-style: none;
+      left: 0;
+      opacity: 0.8;
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+
+    &__link {
+      @include flex(row, center);
+
+      width: 100%;
+      padding-left: 0;
+    }
+
+    &__link:hover {
+      background-color: $softly-cream;
+      cursor: pointer;
+      color: none;
+    }
+
+    &__item {
+      text-align: center;
+      padding: 2px;
+      width: 100%;
+      display: table;
+    }
+
+    &__logout[class] {
+      @include font(24px, 28px, 700);
+
+      margin-left: auto;
+      margin-right: 44px;
+    }
+  }
+
+  @include reduceMargin() {
+    &__item {
+      margin-left: 80px;
+      text-decoration: none;
+      color: black;
+    }
+  }
+}

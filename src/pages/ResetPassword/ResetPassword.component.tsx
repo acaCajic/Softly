@@ -1,14 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import {
-  checkPassword,
-  validateEmail,
-  validatePassword,
-} from '../../services/validators';
 import classNames from 'classnames';
 
 import './ResetPassword.style.scss';
@@ -49,7 +43,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
         className="sy-reset-password__email-input"
         placeholder="Contents"
         labelName="Email"
-        validateFunction={validateEmail}
+        // validateFunction={validateEmail}
         onChange={(e) => {
           setValue((oldValue) => ({ ...oldValue, email: e.target.value }));
         }}
@@ -60,7 +54,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
         className="sy-reset-password__password-input"
         placeholder="Contents"
         labelName="Password"
-        validateFunction={validatePassword}
+        // validateFunction={validatePassword}
         onChange={(e) => {
           setValue((oldValue) => ({ ...oldValue, password: e.target.value }));
         }}
@@ -71,7 +65,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
         className="sy-reset-password__repeat-password-input"
         placeholder="Contents"
         labelName="Repeat Password"
-        validateFunction={(val) => checkPassword(value.password, val)}
+        // validateFunction={(val) => checkPassword(value.password, val)}
         onChange={(e) => {
           setValue((oldValue) => ({
             ...oldValue,

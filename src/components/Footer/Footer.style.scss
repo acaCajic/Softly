@@ -1,0 +1,122 @@
+@use '../../scss/filesettings' as *;
+
+.footer {
+  @include size(100%, 250px);
+
+  background-color: $softly-dusty-rose;
+  padding-top: 36px;
+
+  position: fixed;
+  bottom: 0;
+
+  &__container {
+    @include flex(row, center);
+    @include flex-gap(180px, row);
+
+    width: 100%;
+    max-width: 730px;
+  }
+
+  p {
+    color: $softly-cream;
+  }
+  ul {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+    color: $softly-cream;
+  }
+
+  &__first-column {
+    @include flex(column, flex-start);
+
+    width: fit-content;
+
+    &__softly {
+      @include flex(column, flex-start, center);
+
+      margin-right: auto;
+      text-align: left;
+    }
+
+    &__softly-p {
+      @include font(24px, 28px, 400);
+
+      width: 100%;
+      margin: 0;
+    }
+
+    &__softly-abn {
+      @include font(14px, 30px, 400);
+    }
+
+    &__contact {
+      @include flex(column, flex-start, center);
+    }
+
+    &__contact-p {
+      @include font(24px, 28px, 400);
+
+      margin: 0;
+
+      width: 100%;
+    }
+    &__contact-mon,
+    &__contact-p-88 {
+      width: 100%;
+      margin: 0;
+      @include font(14px, 30px, 400);
+    }
+  }
+
+  &__second-column {
+    @include flex(column);
+
+    width: fit-content;
+
+    &__follow-us {
+      @include font(24px, 28px, 400);
+
+      margin: 0;
+    }
+
+    &__social-network-ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    &__social-network-li {
+      @include font(14px, 30px, 400);
+
+      list-style: none;
+      width: 100%;
+    }
+    a {
+      color: $softly-cream;
+      text-decoration: none;
+    }
+  }
+
+  &__third-column {
+    @include flex(column, flex-start);
+
+    width: fit-content;
+
+    &__legal {
+      @include font(24px, 28px, 400);
+
+      margin: 0;
+    }
+
+    &__legal-items {
+      padding: 0;
+    }
+
+    &__legal-items-li {
+      @include font(14px, 30px, 400);
+
+      padding: 0;
+    }
+  }
+}

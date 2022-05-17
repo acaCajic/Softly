@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import './Input.style.scss';
 
-type InputProps = {
+export type InputProps = {
   labelName?: string;
   prefixNode?: React.ReactNode;
   sufixNode?: React.ReactNode;
