@@ -2,7 +2,7 @@
 
 .home-page {
   //@include flex(row, center, center);
-  @include size(100%);
+  flex: 1 1 100%;
 }
 
 .logout {

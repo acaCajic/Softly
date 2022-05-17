@@ -72,7 +72,7 @@
 
     &__wallet-assets {
       @include flex(column);
-      background-color: green;
+      //background-color: green;
       flex-grow: 1;
 
       &__label {
@@ -98,7 +98,7 @@
     &__balance-transaction {
       @include flex(column);
       flex-grow: 1;
-      background-color: red;
+      //background-color: red;
     }
   }
 }

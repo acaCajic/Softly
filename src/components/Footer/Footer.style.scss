@@ -6,9 +6,6 @@
   background-color: $softly-dusty-rose;
   padding-top: 36px;
 
-  position: fixed;
-  bottom: 0;
-
   &__container {
     @include flex(row, center);
     @include flex-gap(180px, row);
