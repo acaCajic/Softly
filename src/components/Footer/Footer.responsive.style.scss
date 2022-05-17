@@ -3,6 +3,11 @@
 .footer {
   @include flex(row, center);
 
+  @include reduceFooterPadding {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+
   @include phablet {
     padding-left: 88px;
     padding-right: 88px;
@@ -11,10 +16,43 @@
   @include mobile {
     padding-left: 50px;
     padding-right: 34px;
-  }
 
-  @include reduceFooterPadding{
-    padding-left: 150px;
-    padding-right: 150px;
+    &__first-column {
+      &__softly-p {
+        @include font(18px, 22px, 400);
+      }
+
+      &__softly-abn {
+        @include font(12px, 30px, 400);
+      }
+
+      &__contact-p {
+        @include font(18px, 22px, 400);
+      }
+
+      &__contact-mon,
+      &__contact-p-88 {
+        @include font(12px, 30px, 400);
+      }
+    }
+
+    &__second-column {
+      &__follow-us {
+        @include font(18px, 22px, 400);
+      }
+      &__social-network-li {
+        @include font(12px, 30px, 400);
+      }
+    }
+
+    &__third-column {
+      &__legal {
+        @include font(18px, 22px, 400);
+      }
+
+      &__legal-items-li {
+        @include font(12px, 30px, 400);
+      }
+    }
   }
 }

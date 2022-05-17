@@ -28,16 +28,11 @@
     @include flex(column, start);
 
     margin-right: auto;
-    //position: absolute;
-    //left: 24.65%;
 
     &__softly {
       @include flex(column, flex-start, center);
 
       margin-right: auto;
-      // position: absolute;
-      // left: 24.65%;
-      //width: 100%;
       text-align: left;
     }
 
@@ -45,6 +40,11 @@
       @include font(24px, 28px, 400);
 
       width: 100%;
+      margin: 0;
+    }
+
+    &__softly-abn {
+      @include font(14px, 30px, 400);
     }
 
     &__contact {
@@ -54,22 +54,26 @@
     &__contact-p {
       @include font(24px, 28px, 400);
 
+      margin: 0;
+
       width: 100%;
     }
-
+    &__contact-mon,
     &__contact-p-88 {
       width: 100%;
+      margin: 0;
+      @include font(14px, 30px, 400);
     }
   }
 
   &__second-column {
     @include flex(column);
     flex-grow: 0.34;
-    // position: absolute;
-    //left: 47.15%;
-    // margin-right: auto;
+
     &__follow-us {
       @include font(24px, 28px, 400);
+
+      margin: 0;
     }
 
     &__social-network-ul {
@@ -78,6 +82,8 @@
     }
 
     &__social-network-li {
+      @include font(14px, 30px, 400);
+
       list-style: none;
       width: 100%;
     }
@@ -88,12 +94,23 @@
   }
 
   &__third-column {
-    @include flex(column, flex-start, center);
+    @include flex(column, flex-start);
     flex-grow: 0.33;
 
     &__legal {
       @include font(24px, 28px, 400);
+
+      margin: 0;
     }
-    // margin-right: auto;
+
+    &__legal-items {
+      padding: 0;
+    }
+
+    &__legal-items-li {
+      @include font(14px, 30px, 400);
+
+      padding: 0;
+    }
   }
 }

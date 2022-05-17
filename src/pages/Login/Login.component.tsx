@@ -40,22 +40,12 @@ const Login: React.FC<LoginProps> = (props) => {
 
   const classes = classNames('sy-login', className);
 
-  const [values, setValues] = useState<FormValues>({});
   const [loading, setLoading] = useState<boolean>(false);
   const { setUser } = useContext(GeneralContext);
   const navigate = useNavigate();
 
-  // const [validationMap, setValidationMap] = useState<
-  //   Record<keyof FormValues, boolean>
-  // >({ email: false, password: false });
-
-  // const isFormValid = useMemo(
-  //   () => Object.values(validationMap).every((data) => data),
-  //   [validationMap],
-  // );
-
   const handleSubmit = useCallback(
-    async (e: FormValues) => {
+    async (values: FormValues) => {
       try {
         setLoading(true);
 
@@ -72,7 +62,7 @@ const Login: React.FC<LoginProps> = (props) => {
         setLoading(false);
       }
     },
-    [navigate, setUser, values],
+    [navigate, setUser],
   );
 
   return (

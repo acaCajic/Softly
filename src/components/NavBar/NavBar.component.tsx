@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from 'react';
-
+import React, { useContext, useMemo, useState } from 'react';
 import classNames from 'classnames';
+import GeneralContext from '../../Providers/GeneralProvider/General.context';
 import ButtonMenu from '../UI/ButtonMenu';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../UI/Button';
 
 import './NavBar.style.scss';
 import './NavBar.responsive.style.scss';
@@ -20,6 +20,9 @@ const navItems = [
 
 const NavBar: React.FC<NavBarProps> = (props) => {
   const { className } = props;
+
+  const { logout } = useContext(GeneralContext);
+
   const [btnIsOpen, setBtnIsOpen] = useState<boolean>(false);
 
   const classes = classNames('sy-nav', className);
@@ -45,12 +48,19 @@ const NavBar: React.FC<NavBarProps> = (props) => {
           'sy-nav__sidedrawer--active': btnIsOpen,
         })}
       >
+        <img
+          src="/assets/images/logo.png"
+          alt="logo"
+          className="sy-nav__logo-side-menu"
+        />
         {renderNavLinks}
       </aside>
 
       <div className={classNames('sy-nav__items')}>{renderNavLinks}</div>
 
-      <label className="sy-nav__logout">Logout</label>
+      <Button className="sy-nav__logout" onClick={logout}>
+        Logout
+      </Button>
       <ButtonMenu
         btnOpen={btnIsOpen}
         onClick={() => {

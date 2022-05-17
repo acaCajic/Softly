@@ -12,17 +12,25 @@
 
   &__link {
     @include font(18px, 22px, 800);
-    
+
     padding-left: 146px;
     text-decoration: none;
     color: black;
-    
+  }
+
+  &__link:hover {
+    color: $softly-green;
   }
 
   &__logo {
-    @include size(90px, 64);
+    @include size(90px, 64px);
 
-    padding-left: 54px;
+    margin-left: 54px;
+  }
+  &__logo-side-menu {
+    @include size(90px, 64px);
+
+    margin-bottom: 40px;
   }
 
   &__sidedrawer {
@@ -47,11 +55,12 @@
     color: black;
   }
 
-  &__logout {
-    @include font(24px, 30px, 700);
+  &__logout[class] {
+    @include font(24px, 28px, 700);
 
-    margin-right: 64px;
-    padding-left: 10px;
+    width: fit-content;
+    padding: 0 0 0 24px;
     border-bottom: 4px solid #c9b1a9;
+    margin-right: 54px;
   }
 }
