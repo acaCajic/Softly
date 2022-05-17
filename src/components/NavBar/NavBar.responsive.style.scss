@@ -1,6 +1,13 @@
 @use '../../scss/filesettings' as *;
 
 .sy-nav {
+  @include above-desktop() {
+    &__items {
+      > [class*='link']:not(:last-child) {
+        margin-right: 40px;
+      }
+    }
+  }
   @include phablet() {
     .button-menu {
       display: flex;
@@ -24,6 +31,10 @@
 
       &--active {
         transform: translate3d(0, 0, 0);
+      }
+
+      > [class*='link']:not(:last-of-type) {
+        margin: 0 auto;
       }
     }
 

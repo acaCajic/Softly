@@ -1,14 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import CheckBox from '../../components/UI/CheckBox';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import {
-  checkPassword,
-  validateEmail,
-  validatePassword,
-} from '../../services/validators';
 import classNames from 'classnames';
 
 import './ResetPassword.style.scss';

@@ -3,35 +3,29 @@
 .footer {
   @include flex(row, center);
 
-  @include reduceFooterPadding {
-    padding-left: 150px;
-    padding-right: 150px;
-  }
-
   @include phablet {
-    padding-left: 88px;
-    padding-right: 88px;
+    &__container {
+      @include flex-gap(80px, row);
+    }
   }
 
   @include mobile {
-    padding-left: 50px;
-    padding-right: 34px;
+    height: 220px;
+    padding: 20px;
+
+    &__container {
+      @include flex-gap(24px, row);
+    }
 
     &__first-column {
-      &__softly-p {
-        @include font(18px, 22px, 400);
-      }
-
-      &__softly-abn {
-        @include font(12px, 30px, 400);
-      }
-
+      &__softly-p,
       &__contact-p {
         @include font(18px, 22px, 400);
       }
 
       &__contact-mon,
-      &__contact-p-88 {
+      &__contact-p-88,
+      &__softly-abn {
         @include font(12px, 30px, 400);
       }
     }

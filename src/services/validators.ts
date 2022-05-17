@@ -4,12 +4,23 @@ const EMAIL_REGEX = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
 const PASSWORD_REGEX =
   /(?=(.*[0-9]))(?=.*[!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/;
 
+const MUST_CONTAIN_LETTER = /(?=.*?[a-z, A-Z])/;
+const MUST_CONTAIN_NUMBER = /(?=.*?[0-9])/;
+
 const VALID: any = undefined;
 
 export const required = (errMessage: string) => (value: any) => {
   if (typeof value === 'string') {
     return value !== '' ? VALID : errMessage;
   }
+};
+
+export const mustContainerNumber = (errorMessage: string) => (value: any) => {
+  return MUST_CONTAIN_NUMBER.test(value) ? VALID : errorMessage;
+};
+
+export const mustContainLetter = (errorMessage: string) => (value: any) => {
+  return MUST_CONTAIN_LETTER.test(value) ? VALID : errorMessage;
 };
 
 export const validateEmail = (errMessage: string) => (value: string) => {

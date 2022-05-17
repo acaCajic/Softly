@@ -21,7 +21,8 @@ function App() {
           <Route path="resetpassword" element={<ResetPassword />} />
           <Route path="verify" element={<Verify />} />
           <Route path="profilewallet" element={<ProfileWallet />} />
-
+          <Route path="auctions" element={<ProfileWallet />} />
+          <Route index element={<Home />} />
           <Route path="*" element={<p>not found page</p>} />
         </Routes>
       </GeneralProvider>

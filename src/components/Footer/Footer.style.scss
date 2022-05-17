@@ -1,17 +1,21 @@
 @use '../../scss/filesettings' as *;
 
 .footer {
-  @include flex(row, center);
+  @include size(100%, 250px);
 
   background-color: $softly-dusty-rose;
-  padding-left: 355px;
-  padding-right: 355px;
   padding-top: 36px;
 
   position: fixed;
   bottom: 0;
-  width: 100%;
-  height: 250px;
+
+  &__container {
+    @include flex(row, center);
+    @include flex-gap(180px, row);
+
+    width: 100%;
+    max-width: 730px;
+  }
 
   p {
     color: $softly-cream;
@@ -25,9 +29,9 @@
   }
 
   &__first-column {
-    @include flex(column, start);
+    @include flex(column, flex-start);
 
-    margin-right: auto;
+    width: fit-content;
 
     &__softly {
       @include flex(column, flex-start, center);
@@ -68,7 +72,8 @@
 
   &__second-column {
     @include flex(column);
-    flex-grow: 0.34;
+
+    width: fit-content;
 
     &__follow-us {
       @include font(24px, 28px, 400);
@@ -95,7 +100,8 @@
 
   &__third-column {
     @include flex(column, flex-start);
-    flex-grow: 0.33;
+
+    width: fit-content;
 
     &__legal {
       @include font(24px, 28px, 400);

@@ -1,20 +1,23 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
-import Input from '../../components/UI/Input';
 import {
   composeValidators,
+  mustContainerNumber,
+  mustContainLetter,
   required,
   validateEmail,
-  validatePassword,
 } from '../../services/validators';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from '../../components/UI/Spinner';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
+import Field from '../../components/FormWrapper/components/Field';
+import FormWrapper from '../../components/FormWrapper';
+import InputField from '../../components/Fields/InputField';
 import classNames from 'classnames';
 import api from '../../api';
 import { AxiosError } from 'axios';
@@ -22,9 +25,7 @@ import { toastError } from '../../utils';
 
 import './Login.style.scss';
 import './Login.style.responsive.scss';
-import Field from '../../components/FormWrapper/components/Field';
-import FormWrapper from '../../components/FormWrapper';
-import InputField from '../../components/Fields/InputField';
+import 'react-toastify/dist/ReactToastify.css';
 
 type FormValues = {
   email?: string;
@@ -40,9 +41,10 @@ const Login: React.FC<LoginProps> = (props) => {
 
   const classes = classNames('sy-login', className);
 
-  const [loading, setLoading] = useState<boolean>(false);
-  const { setUser } = useContext(GeneralContext);
   const navigate = useNavigate();
+  const { setUser } = useContext(GeneralContext);
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = useCallback(
     async (values: FormValues) => {
@@ -94,51 +96,12 @@ const Login: React.FC<LoginProps> = (props) => {
         className="sy-login__input-password"
         labelName="Password"
         placeholder="Contents"
-        /*  validate={composeValidators(
+        validate={composeValidators(
           required('This field is required'),
-          validatePassword('Password is not valid'),
-        )}*/
+          mustContainerNumber('Password must container number'),
+          mustContainLetter('Password must container letter'),
+        )}
       />
-      {/* <Input
-        type="email"
-        name="email"
-        className="sy-login__input-email"
-        labelName="Email"
-        placeholder="Contents"
-        validateFunction={validateEmail}
-        onValidation={(value) =>
-          setValidationMap((oldValues) => {
-            return {
-              ...oldValues,
-              email: value,
-            };
-          })
-        }
-        onChange={(e) => {
-          setValues((oldValues) => ({ ...oldValues, email: e.target.value }));
-        }}
-      ></Input> */}
-      {/* <Input
-        type="password"
-        name="password"
-        className="sy-login__input-password"
-        labelName="Password"
-        placeholder="Contents"
-        onValidation={(value) =>
-          setValidationMap((oldValues) => {
-            return {
-              ...oldValues,
-              password: value,
-            };
-          })
-        }
-        onChange={(e) => {
-          setValues((oldValues) => ({
-            ...oldValues,
-            password: e.target.value,
-          }));
-        }}
-      /> */}
       <div className="sy-login__checkbox-label">
         <CheckBox
           className="sy-login__checkbox-label__checkbox"

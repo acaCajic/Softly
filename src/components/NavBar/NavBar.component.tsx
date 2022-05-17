@@ -2,7 +2,7 @@ import React, { useContext, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
 import ButtonMenu from '../UI/ButtonMenu';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Button from '../UI/Button';
 
 import './NavBar.style.scss';
@@ -31,9 +31,17 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     () =>
       navItems.map((item, index) => {
         return (
-          <Link to={item.to} key={index} className="sy-nav__link">
+          <NavLink
+            to={item.to}
+            key={index}
+            className={({ isActive }) =>
+              classNames('sy-nav__link', {
+                'sy-nav__link--active': isActive,
+              })
+            }
+          >
             {item.title}
-          </Link>
+          </NavLink>
         );
       }),
     [],

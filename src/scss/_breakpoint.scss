@@ -3,7 +3,7 @@ $responsive-phablet: 768px;
 $responsive-desktop: 1200px;
 $responsive-above-desktop: 1024px;
 $responsive-reduce-margin: 930px;
-$responsive-reduce-padding-footer:1150px;
+$responsive-reduce-padding-footer: 1150px;
 
 @mixin mobile() {
   @media (max-width: $responsive-mobile) {
@@ -35,14 +35,20 @@ $responsive-reduce-padding-footer:1150px;
   }
 }
 
+@mixin above-desktop() {
+  @media (max-width: $responsive-above-desktop) {
+    @content;
+  }
+}
+
 @mixin reduceMargin() {
   @media screen and(max-width:$responsive-reduce-margin) {
     @content;
   }
 }
 
-@mixin reduceFooterPadding(){
-@media screen and (max-width:$responsive-reduce-padding-footer){
-  @content;
-}
+@mixin reduceFooterPadding() {
+  @media screen and (max-width: $responsive-reduce-padding-footer) {
+    @content;
+  }
 }
