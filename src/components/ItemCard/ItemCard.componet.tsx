@@ -2,12 +2,13 @@ import React from 'react';
 import Button from '../UI/Button';
 
 import './ItemCard.style.scss';
+import './ItemCard.responsive.styles.scss';
 
 type ItemCardProps = {
   className?: string;
 };
 
-const ItemCard = () => {
+const ItemCard: React.FC<ItemCardProps> = (props) => {
   return (
     <div className="sy-item-card">
       <img

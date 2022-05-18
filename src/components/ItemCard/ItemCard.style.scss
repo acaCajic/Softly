@@ -3,7 +3,8 @@
 .sy-item-card {
   @include flex(column, flex-start, start);
 
-  width: max-content;
+  width: 100%;
+  max-width: 270px;
 
   &__picture {
     border-bottom: 10px solid $softly-green;

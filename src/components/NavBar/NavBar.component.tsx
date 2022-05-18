@@ -49,7 +49,13 @@ const NavBar: React.FC<NavBarProps> = (props) => {
 
   return (
     <div className={classes}>
-      <img src="/assets/images/logo.png" alt="logo" className="sy-nav__logo" />
+      <NavLink to="/home">
+        <img
+          src="/assets/images/logo.png"
+          alt="logo"
+          className="sy-nav__logo"
+        />
+      </NavLink>
 
       <aside
         className={classNames('sy-nav__sidedrawer', {

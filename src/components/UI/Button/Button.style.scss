@@ -1,7 +1,7 @@
 @use '../../../scss/filesettings' as *;
 
 .btn-style {
-  @include size(140px, 28px);
+  //@include size(140px, 28px);
   @include font(18px, 22px, 600);
   @include flex(row-reverse, center, center);
 
@@ -9,6 +9,7 @@
   outline: none;
   border: none;
   font-family: Orqquidea-Sans;
+  width: 140px;
 
   &--primary {
     border-radius: $border-radius;
@@ -50,5 +51,12 @@
     svg {
       margin-left: 8px;
     }
+  }
+  &--icon-down {
+    flex-direction: column-reverse;
+    // svg {
+    //   height: 26px;
+    //   width: 26px;
+    // }
   }
 }

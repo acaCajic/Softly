@@ -4,7 +4,8 @@ $responsive-desktop: 1200px;
 $responsive-above-desktop: 1024px;
 $responsive-reduce-margin: 930px;
 $responsive-reduce-padding-footer: 1150px;
-
+$responsive-card-auction-table: 1034px;
+$responsive-card-mobile-auction-table: 636px;
 @mixin mobile() {
   @media (max-width: $responsive-mobile) {
     @content;
@@ -49,6 +50,18 @@ $responsive-reduce-padding-footer: 1150px;
 
 @mixin reduceFooterPadding() {
   @media screen and (max-width: $responsive-reduce-padding-footer) {
+    @content;
+  }
+}
+
+@mixin tablet-cards-auctions() {
+  @media screen and (max-width: $responsive-card-auction-table) {
+    @content;
+  }
+}
+
+@mixin mobile-cards-auctions() {
+  @media screen and (max-width: $responsive-card-mobile-auction-table) {
     @content;
   }
 }
