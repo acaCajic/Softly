@@ -10,10 +10,10 @@ const Routes: React.FC<ExtendedRoute> = (props) => {
     return routes?.map(
       (
         {
+          path,
           children,
           index = false,
           routes: subRoutes,
-          path,
           caseSensitive,
           ...restRoute
         },
@@ -22,8 +22,8 @@ const Routes: React.FC<ExtendedRoute> = (props) => {
         return (
           <Route
             key={ind}
-            index={index}
             path={path}
+            index={index}
             element={<EnhancedRoute {...restRoute} />}
           >
             {subRoutes?.length > 0

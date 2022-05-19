@@ -5,11 +5,6 @@ import NavBar from '../../components/NavBar';
 import './Home.styles.scss';
 
 const Home: React.FC = () => {
-  return (
-    <div className="home-page">
-      <NavBar />
-      <Footer></Footer>
-    </div>
-  );
+  return <div className="home-page"></div>;
 };
 export default Home;

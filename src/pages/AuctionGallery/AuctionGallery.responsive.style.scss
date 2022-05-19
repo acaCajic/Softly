@@ -38,6 +38,44 @@
         }
       }
     }
+
+    &__paragraph {
+      @include flex(column, center, center);
+
+      margin-top: 106px;
+      max-width: 430px;
+      margin-left: auto;
+
+      background-color: $softly-dusty-rose;
+
+      padding: 32px 38px 32px 38px;
+      margin-bottom: 162px;
+
+      &__picture {
+        display: none;
+      }
+
+      &__text-btn {
+        &__title {
+          @include font(34px, 40px, 700);
+
+          color: $softly-cream;
+        }
+
+        &__text {
+          @include font(12px, 30px, 700);
+
+          font-family: Bodoni 72;
+          color: $softly-cream;
+        }
+
+        &__btn {
+          @include size(150px, 42px);
+
+          margin-left: auto;
+        }
+      }
+    }
   }
 
   @include mobile-cards-auctions() {
@@ -90,7 +128,42 @@
         @include font(14px, 16px, 400);
 
         margin-top: 64px;
-        //margin-bottom: 76px;
+      }
+    }
+
+    &__paragraph {
+      @include flex(column, center, center);
+
+      margin-top: 64px;
+
+      background-color: $softly-dusty-rose;
+
+      padding: 32px 38px 32px 38px;
+      margin-bottom: 162px;
+
+      &__picture {
+        display: none;
+      }
+
+      &__text-btn {
+        &__title {
+          @include font(24px, 28px, 700);
+
+          color: $softly-cream;
+        }
+
+        &__text {
+          @include font(12px, 30px, 700);
+
+          font-family: Bodoni 72;
+          color: $softly-cream;
+        }
+
+        &__btn {
+          @include size(150px, 42px);
+
+          margin-left: auto;
+        }
       }
     }
   }

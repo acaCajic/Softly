@@ -26,16 +26,14 @@ export const routes = [
     authorized: true,
   },
   {
-    path: 'catalog',
-    element: Catalog,
-  },
-  {
     path: 'login',
     element: Login,
+    onlyPublic: true,
   },
   {
     path: 'sign-up',
     element: SignUp,
+    onlyPublic: true,
   },
   {
     path: 'reset-password',
@@ -62,12 +60,16 @@ export const routes = [
   },
   {
     path: 'auctions',
-    element: () => 'auctions',
     authorized: true,
+    element: () => 'auctions',
+  },
+  {
+    path: 'catalog',
+    element: Catalog,
   },
   {
     index: true,
-    element: <Navigate to="/home" />,
+    element: <Navigate to="home" replace />,
   },
   {
     path: '*',

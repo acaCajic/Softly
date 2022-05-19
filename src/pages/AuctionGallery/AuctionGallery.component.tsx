@@ -26,7 +26,6 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
 
   return (
     <div className={classes}>
-      <NavBar />
       <div className="sy-auction-gallery__container">
         <div className="sy-auction-gallery__live-auctions">
           <div className="sy-auction-gallery__live-auctions__header">
@@ -95,11 +94,26 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
         </div>
 
         <div className="sy-auction-gallery__paragraph">
-          <ItemCard className="sy-auction-gallery__paragraph__picture" />
-          <div className="sy-auction-gallery__paragraph__text-btn"></div>
+          <img
+            src="/assets/images/Rectangle14.png"
+            alt="item-auctions"
+            className="sy-auction-gallery__paragraph__picture"
+          />
+          <div className="sy-auction-gallery__paragraph__text-btn">
+            <p className="sy-auction-gallery__paragraph__text-btn__title">
+              Sell with Softly
+            </p>
+            <p className="sy-auction-gallery__paragraph__text-btn__text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            </p>
+            <Button className="sy-auction-gallery__paragraph__text-btn__btn">
+              START
+            </Button>
+          </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

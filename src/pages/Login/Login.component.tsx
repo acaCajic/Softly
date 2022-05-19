@@ -54,9 +54,10 @@ const Login: React.FC<LoginProps> = (props) => {
         const { email, password } = values;
         const { data } = await api.auth.login(email, password);
 
-        setUser(data.user);
-        navigate({ pathname: '/home' });
         localStorage.setItem('token', data.accessToken);
+
+        setUser(data.user);
+        navigate('/home', { replace: true });
       } catch (error) {
         const err = error as AxiosError<{ message: string }>;
         toastError(err);

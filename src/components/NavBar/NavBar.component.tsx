@@ -14,7 +14,7 @@ type NavBarProps = {
 
 const navItems = [
   { title: 'ABOUT', to: '/about' },
-  { title: 'AUCTIONS', to: '/auctions' },
+  { title: 'AUCTIONS', to: '/auctions-gallery' },
   { title: 'EXPERIENCES', to: '/experiences' },
 ];
 
