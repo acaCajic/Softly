@@ -124,7 +124,7 @@ const Login: React.FC<LoginProps> = (props) => {
       </div>
       <div className="sy-login__btn-signup-text">
         <span>Don't have an account yet?</span>
-        <Link to="/signup" className="sy-login__btn-signup">
+        <Link to="/sign-up" className="sy-login__btn-signup">
           Sign up
         </Link>
       </div>

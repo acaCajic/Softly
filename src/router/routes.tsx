@@ -10,6 +10,7 @@ import SignUp from '../pages/SignUp';
 import Verify from '../pages/Verify';
 
 export type RouteProps = Omit<RouteObject, 'element'> & {
+  title?: string;
   authorized?: boolean;
   onlyPublic?: boolean;
   element?: React.FC | React.ReactNode;
@@ -52,16 +53,20 @@ export const routes = [
   {
     path: 'about',
     element: About,
+    authorized: true,
+    title: 'About',
   },
   {
     path: 'auctions-gallery',
     element: AuctionGallery,
     authorized: true,
+    title: 'Auctions',
   },
   {
-    path: 'auctions',
+    path: 'expericences',
+    element: AuctionGallery,
     authorized: true,
-    element: () => 'auctions',
+    title: 'Expericences',
   },
   {
     path: 'catalog',

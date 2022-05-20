@@ -23,7 +23,7 @@ const ProfileWallet: React.FC<ProfileWalletProps> = (props) => {
 
   return (
     <div className={classes}>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="sy-profile-wallet__container">
         <div className="sy-profile-wallet__side-menu">
           <div className="sy-profile-wallet__side-menu__picture-name">

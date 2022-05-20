@@ -68,7 +68,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         setLoading(false);
       }
     },
-    [navigate, setUser, values],
+    [navigate, setUser],
   );
 
   return (
@@ -80,19 +80,6 @@ const SignUp: React.FC<SignUpProps> = (props) => {
       />
       <label className="sy-signup__label-create">Sign Up</label>
 
-      {/* <Input
-        type="text"
-        name="firstName"
-        labelName="First Name"
-        placeholder="Contents"
-        className="sy-signup__first-name"
-        onChange={(e) =>
-          setValues((oldValues) => ({
-            ...oldValues,
-            firstName: e.target.value,
-          }))
-        }
-      ></Input> */}
       <Field
         name="firstName"
         component={InputField}
@@ -103,16 +90,6 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         validate={composeValidators(required('This field is required'))}
       />
 
-      {/* <Input
-        type="text"
-        name="lastName"
-        labelName="Last Name"
-        placeholder="Contents"
-        className="sy-signup__last-name"
-        onChange={(e) =>
-          setValues((oldValues) => ({ ...oldValues, lastName: e.target.value }))
-        }
-      ></Input> */}
       <Field
         name="lastName"
         component={InputField}
@@ -123,17 +100,6 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         validate={composeValidators(required('This field is required'))}
       />
 
-      {/* <Input
-        type="text"
-        name="email"
-        labelName="Email"
-        placeholder="Contents"
-        className="sy-signup__input-email"
-        // validateFunction={validateEmail}
-        onChange={(e) =>
-          setValues((oldValues) => ({ ...oldValues, email: e.target.value }))
-        }
-      ></Input> */}
       <Field
         name="email"
         component={InputField}
@@ -147,17 +113,6 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         )}
       />
 
-      {/* <Input
-        type="password"
-        name="password"
-        labelName="Password"
-        placeholder="Contents"
-        className="sy-signup__input-password"
-        //validateFunction={validatePassword}
-        onChange={(e) =>
-          setValues((oldValues) => ({ ...oldValues, password: e.target.value }))
-        }
-      ></Input> */}
       <Field
         name="password"
         component={InputField}
@@ -172,22 +127,6 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         )}
       />
 
-      {/* <Input
-        type="password"
-        name="repeatPassword"
-        labelName="Repeat Password"
-        placeholder="Contents"
-        className="sy-signup__input-repeat-password"
-        errMsg="Incorect password"
-        validateFunction={(value) => checkPassword(values.password, value)}
-        onChange={(e) =>
-          setValues((oldValues) => ({
-            ...oldValues,
-            repeatPassword: e.target.value,
-          }))
-        }
-      ></Input> */}
-
       <Field
         name="repeatPassword"
         component={InputField}
@@ -199,6 +138,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
           required('This field is required'),
           mustContainerNumber('Password must container number'),
           mustContainLetter('Password must container letter'),
+          checkPassword('Password must match', 'password'),
         )}
       />
 

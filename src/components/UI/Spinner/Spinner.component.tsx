@@ -5,7 +5,7 @@ import './Spinner.style.scss';
 
 type SpinnerProps = {
   color?: string;
-  size: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
   className?: string;
 };
 

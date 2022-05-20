@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
@@ -7,9 +7,12 @@ import ItemCard from '../../components/ItemCard';
 import Button from '../../components/UI/Button';
 import TriangleDown from '../../icons/TriangleDown.icon';
 import { MATHC_MAP_NAME, useMathcMedia } from '../../hooks/useMathMedia';
+import { Asset } from '../../models/Asset';
+import api from '../../api/';
 
 import './AuctionGallery.style.scss';
 import './AuctionGallery.responsive.style.scss';
+import Spinner from '../../components/UI/Spinner';
 
 type AuctionGalleryProps = {
   className?: 'string';
@@ -20,12 +23,38 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
 
   const classes = classNames('sy-auction-gallery', className);
 
+  const [auctions, setAuctions] = useState<{
+    liveAuctions: Array<Asset>;
+    upcomingAuction: Array<Asset>;
+  }>(null);
+
   const isMobile = useMathcMedia(MATHC_MAP_NAME.IS_MOBILE);
 
-  console.log(isMobile);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const loadAuctions = async () => {
+      try {
+        setLoading(true);
+        const { data } = await api.auctions.getGalleryAuctions();
+
+        setAuctions((oldAuctions) => ({
+          ...oldAuctions,
+          liveAuctions: data.liveAssets,
+          upcomingAuction: data.upcomingAssets,
+        }));
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (!auctions) loadAuctions();
+  }, [auctions]);
 
   return (
     <div className={classes}>
+      {loading && <Spinner />}
       <div className="sy-auction-gallery__container">
         <div className="sy-auction-gallery__live-auctions">
           <div className="sy-auction-gallery__live-auctions__header">
@@ -44,12 +73,15 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
             </Button>
           </div>
           <div className="sy-auction-gallery__live-auctions__cards">
-            {mockData.map((item, index) => {
-              return <ItemCard key={index} />;
+            {auctions?.liveAuctions.map((item, index) => {
+              return <ItemCard key={index} pictureUrl={item.pictureUrl} />;
+              // return (
+              //   <img src={item.pictureUrl} alt="picture-item" key={index} />
+              // );
             })}
-            {mockData.map((item, index) => {
+            {/* {mockData.map((item, index) => {
               return <ItemCard key={index} />;
-            })}
+            })} */}
           </div>
           <Button
             icon={<TriangleDown />}
@@ -77,12 +109,14 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
             </Button>
           </div>
           <div className="sy-auction-gallery__live-auctions__cards">
-            {mockData.map((item, index) => {
+            {auctions.upcomingAuction.map((item, index) => {
+              // return <label>{item.companyName}</label>;
+
               return <ItemCard key={index} />;
             })}
-            {mockData.map((item, index) => {
+            {/* {mockData.map((item, index) => {
               return <ItemCard key={index} />;
-            })}
+            })} */}
           </div>
           <Button
             icon={<TriangleDown />}
