@@ -1,8 +1,5 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
-import { mockData } from '../../mockData';
 import ItemCard from '../../components/ItemCard';
 import Button from '../../components/UI/Button';
 import TriangleDown from '../../icons/TriangleDown.icon';
@@ -75,13 +72,7 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
           <div className="sy-auction-gallery__live-auctions__cards">
             {auctions?.liveAuctions.map((item, index) => {
               return <ItemCard key={index} pictureUrl={item.pictureUrl} />;
-              // return (
-              //   <img src={item.pictureUrl} alt="picture-item" key={index} />
-              // );
             })}
-            {/* {mockData.map((item, index) => {
-              return <ItemCard key={index} />;
-            })} */}
           </div>
           <Button
             icon={<TriangleDown />}
@@ -109,14 +100,9 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
             </Button>
           </div>
           <div className="sy-auction-gallery__live-auctions__cards">
-            {auctions.upcomingAuction.map((item, index) => {
-              // return <label>{item.companyName}</label>;
-
-              return <ItemCard key={index} />;
+            {auctions?.upcomingAuction.map((item, index) => {
+              return <ItemCard key={index} pictureUrl={item.pictureUrl} />;
             })}
-            {/* {mockData.map((item, index) => {
-              return <ItemCard key={index} />;
-            })} */}
           </div>
           <Button
             icon={<TriangleDown />}

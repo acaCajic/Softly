@@ -57,6 +57,7 @@
 
     &__cards {
       display: grid;
+      grid-row-start: auto;
       grid-template-columns: repeat(3, 1fr);
       column-gap: 84px;
       row-gap: 96px;

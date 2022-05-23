@@ -4,13 +4,14 @@
   @include flex(column, flex-start, start);
 
   width: 100%;
-  max-width: 270px;
+  //max-width: 270px;
+  max-width: 284px;
 
   &__picture {
     border-bottom: 10px solid $softly-green;
 
-    width: 330px;
-    height: 220px;
+    width: 284px;
+    height: 350px;
   }
 
   &__lorem {
