@@ -1,5 +1,4 @@
 import React, { useCallback, useContext } from 'react';
-import Input from '../../components/UI/Input';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CheckBox from '../../components/UI/CheckBox';
@@ -44,14 +43,12 @@ const SignUp: React.FC<SignUpProps> = (props) => {
 
   const { setUser } = useContext(GeneralContext);
 
-  const [values, setValues] = useState<SignUpValues>({});
   const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(
     async (values: SignUpValues) => {
-      // e.preventDefault();
       try {
         const { email } = values;
         setLoading(true);

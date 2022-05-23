@@ -1,11 +1,4 @@
 @use '../../scss/tools/tools' as *;
 
 .home-page {
-  //@include flex(row, center, center);
-  flex: 1 1 100%;
-}
-
-.logout {
-  margin-top: 200px;
-  margin-left: 200px;
 }

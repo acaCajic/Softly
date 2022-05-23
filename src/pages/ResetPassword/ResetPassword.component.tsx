@@ -43,7 +43,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
         className="sy-reset-password__email-input"
         placeholder="Contents"
         labelName="Email"
-        // validateFunction={validateEmail}
         onChange={(e) => {
           setValue((oldValue) => ({ ...oldValue, email: e.target.value }));
         }}
@@ -54,7 +53,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
         className="sy-reset-password__password-input"
         placeholder="Contents"
         labelName="Password"
-        // validateFunction={validatePassword}
         onChange={(e) => {
           setValue((oldValue) => ({ ...oldValue, password: e.target.value }));
         }}
@@ -65,7 +63,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
         className="sy-reset-password__repeat-password-input"
         placeholder="Contents"
         labelName="Repeat Password"
-        // validateFunction={(val) => checkPassword(value.password, val)}
         onChange={(e) => {
           setValue((oldValue) => ({
             ...oldValue,

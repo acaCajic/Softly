@@ -38,11 +38,6 @@ export const checkPassword =
     else return errMessage;
   };
 
-/*export const checkPassword = (password: string, repeatPassword: string) => {
-  if (password === repeatPassword) return true;
-  else return false;
-};*/
-
 export const composeValidators =
   (...validators: Array<FieldValidator<any>>) =>
   (value: any, allValues: Record<string, any>) => {

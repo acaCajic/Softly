@@ -4,7 +4,6 @@
   @include flex(column, flex-start, start);
 
   width: 100%;
-  //max-width: 270px;
   max-width: 284px;
 
   &__picture {
@@ -30,7 +29,10 @@
   &__box {
     @include flex(column, flex-start);
 
-    padding-top: 18px;
+    //padding-top: 18px;
+    > p {
+      margin: 0;
+    }
     //height: 58px;
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
@@ -16,7 +17,6 @@ type MainWrapperProps = {
 const MainWrapper: React.FC<MainWrapperProps> = (props) => {
   const { children } = props;
 
-  const linkNavBar = ['about', 'auctions-gallery', 'expericences'];
   const notShowNavigation = ['/login', '/sign-up'];
 
   const location = useLocation();
@@ -31,11 +31,6 @@ const MainWrapper: React.FC<MainWrapperProps> = (props) => {
         ),
     [],
   );
-
-  // const hideNavigation = useMemo(
-  //   () => location.pathname === '/login' || location.pathname === '/sign-up',
-  //   [location],
-  // );
 
   const hideNavigation = useMemo(
     () => notShowNavigation.includes(location.pathname),

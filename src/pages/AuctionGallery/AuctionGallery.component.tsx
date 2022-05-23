@@ -6,15 +6,14 @@ import TriangleDown from '../../icons/TriangleDown.icon';
 import { MATHC_MAP_NAME, useMathcMedia } from '../../hooks/useMathMedia';
 import { Asset } from '../../models/Asset';
 import api from '../../api/';
+import Spinner from '../../components/UI/Spinner';
 
 import './AuctionGallery.style.scss';
 import './AuctionGallery.responsive.style.scss';
-import Spinner from '../../components/UI/Spinner';
 
 type AuctionGalleryProps = {
   className?: 'string';
 };
-
 const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
   const { className } = props;
 
@@ -34,6 +33,8 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
       try {
         setLoading(true);
         const { data } = await api.auctions.getGalleryAuctions();
+        const dataAuctions = await api.auctions.getAuctions();
+        console.log(dataAuctions.data.items);
 
         setAuctions((oldAuctions) => ({
           ...oldAuctions,
@@ -71,7 +72,7 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
           </div>
           <div className="sy-auction-gallery__live-auctions__cards">
             {auctions?.liveAuctions.map((item, index) => {
-              return <ItemCard key={index} pictureUrl={item.pictureUrl} />;
+              return <ItemCard key={index} itemAsset={item} />;
             })}
           </div>
           <Button
@@ -101,7 +102,7 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
           </div>
           <div className="sy-auction-gallery__live-auctions__cards">
             {auctions?.upcomingAuction.map((item, index) => {
-              return <ItemCard key={index} pictureUrl={item.pictureUrl} />;
+              return <ItemCard key={index} itemAsset={item} />;
             })}
           </div>
           <Button
