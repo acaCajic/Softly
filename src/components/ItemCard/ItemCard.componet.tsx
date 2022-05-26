@@ -13,10 +13,11 @@ type ItemCardProps = {
   className?: string;
   pictureUrl?: string;
   itemAsset?: Asset;
+  isStart?: boolean;
 };
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-  const { className, itemAsset } = props;
+  const { className, itemAsset, isStart = false } = props;
 
   const now = useMemo(() => new Date(), []);
 
@@ -67,7 +68,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
         <div className="sy-item-card__box">
           <p>Company</p>
           <p>{itemAsset.companyName}</p>
-          <p>Time</p>
+          <p>{isStart ? 'End time' : 'Start time'}</p>
           <p>
             {itemAuction
               ? prepareDifferenceLabel(

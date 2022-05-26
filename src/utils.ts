@@ -1,5 +1,9 @@
 import { AxiosError } from 'axios';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { toast } from 'react-toastify';
+
+dayjs.extend(relativeTime);
 
 const MILLISECONDS_IN_HOURS = 1000 * 60 * 60;
 const MILLISECONDS_IN_MINUTES = 1000 * 60;
@@ -18,7 +22,7 @@ export const prepareDifferenceLabel = (
   dateString: string,
   counter: number,
 ) => {
-  const milliseconds =
+  /* const milliseconds =
     +new Date(dateString) - +now - counter * MILLISECONDS_IN_SECONDS;
 
   const hours = Math.floor(milliseconds / MILLISECONDS_IN_HOURS);
@@ -33,5 +37,7 @@ export const prepareDifferenceLabel = (
       minutes * MILLISECONDS_IN_MINUTES) /
       MILLISECONDS_IN_SECONDS,
   );
-  return `${hours} hours ${minutes} min ${seconds} sec`;
+  return `${hours} hours ${minutes} min ${seconds} sec`;*/
+
+  return dayjs(dateString).fromNow().toString();
 };

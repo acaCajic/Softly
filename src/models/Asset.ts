@@ -4,6 +4,7 @@ export type Asset = {
   companyName: string;
   companyPhoneNumber: string;
   additionalComments: string;
+  status: string;
   currentBid: number;
   firstName: string;
   lastName: string;

@@ -10,6 +10,8 @@ import Spinner from '../../components/UI/Spinner';
 
 import './AuctionGallery.style.scss';
 import './AuctionGallery.responsive.style.scss';
+import { usePagination } from '../../hooks/usePagination';
+import dayjs from 'dayjs';
 
 type AuctionGalleryProps = {
   className?: 'string';
@@ -26,33 +28,52 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
 
   const isMobile = useMathcMedia(MATHC_MAP_NAME.IS_MOBILE);
 
-  const [loading, setLoading] = useState<boolean>(false);
+  //const [loadingg, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    const loadAuctions = async () => {
-      try {
-        setLoading(true);
-        const { data } = await api.auctions.getGalleryAuctions();
-        const dataAuctions = await api.auctions.getAuctions();
-        console.log(dataAuctions.data.items);
+  const {
+    items: liveAuctions,
+    setItems: setLiveAuctions,
+    loadMore: loadLive,
+    loading: loadingLiveAuctions,
+  } = usePagination<Asset>({
+    request: (page: number, limit: number) =>
+      api.assets.getAssets(page, limit, dayjs('2000-01-01').toISOString()),
+  });
 
-        setAuctions((oldAuctions) => ({
-          ...oldAuctions,
-          liveAuctions: data.liveAssets,
-          upcomingAuction: data.upcomingAssets,
-        }));
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
-    };
+  const {
+    items: upcomingAuctions,
+    setItems: setUpcomingAuctions,
+    loadMore: loadUpcoming,
+    loading: loadingUpcomingAuctions,
+  } = usePagination<Asset>({
+    request: (page: number, limit: number) =>
+      api.assets.getAssets(page, limit, dayjs().toISOString()),
+  });
 
-    if (!auctions) loadAuctions();
-  }, [auctions]);
+  // useEffect(() => {
+  //   const loadAuctions = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const { data } = await api.auctions.getGalleryAuctions();
+  //       const dataAuctions = await api.auctions.getAuctions();
+  //       console.log(dataAuctions.data.items);
+
+  //       setAuctions((oldAuctions) => ({
+  //         ...oldAuctions,
+  //         liveAuctions: data.liveAssets,
+  //         upcomingAuction: data.upcomingAssets,
+  //       }));
+  //     } catch (error) {
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   if (!auctions) loadAuctions();
+  // }, [auctions]);
 
   return (
     <div className={classes}>
-      {loading && <Spinner />}
       <div className="sy-auction-gallery__container">
         <div className="sy-auction-gallery__live-auctions">
           <div className="sy-auction-gallery__live-auctions__header">
@@ -71,17 +92,19 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
             </Button>
           </div>
           <div className="sy-auction-gallery__live-auctions__cards">
-            {auctions?.liveAuctions.map((item, index) => {
-              return <ItemCard key={index} itemAsset={item} />;
+            {liveAuctions?.map((item, index) => {
+              return <ItemCard key={index} itemAsset={item} isStart={true} />;
             })}
           </div>
           <Button
+            onClick={loadLive}
             icon={<TriangleDown />}
             positionIcon="icon-down"
             className="sy-auction-gallery__live-auctions__load-more"
           >
             Load More
           </Button>
+          {loadingLiveAuctions && <Spinner size="small" />}
         </div>
 
         <div className="sy-auction-gallery__upcoming">
@@ -101,17 +124,19 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
             </Button>
           </div>
           <div className="sy-auction-gallery__live-auctions__cards">
-            {auctions?.upcomingAuction.map((item, index) => {
-              return <ItemCard key={index} itemAsset={item} />;
+            {upcomingAuctions.map((item, index) => {
+              return <ItemCard key={index} itemAsset={item} isStart={false} />;
             })}
           </div>
           <Button
+            onClick={loadUpcoming}
             icon={<TriangleDown />}
             positionIcon="icon-down"
             className="sy-auction-gallery__live-auctions__load-more"
           >
             Load More
           </Button>
+          {loadingUpcomingAuctions && <Spinner />}
         </div>
 
         <div className="sy-auction-gallery__paragraph">

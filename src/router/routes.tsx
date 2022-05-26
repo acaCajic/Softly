@@ -1,6 +1,7 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 import About from '../pages/About';
 import AuctionGallery from '../pages/AuctionGallery';
+import AuctionProduct from '../pages/AuctionProduct';
 import Catalog from '../pages/Catalog';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
@@ -47,6 +48,11 @@ export const routes = [
   {
     path: 'profile-wallet',
     element: ProfileWallet,
+    authorized: true,
+  },
+  {
+    path: 'auction-product',
+    element: AuctionProduct,
     authorized: true,
   },
 
