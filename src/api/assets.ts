@@ -13,4 +13,13 @@ async function getAssets(
   });
 }
 
-export default { getAssets };
+async function setBidAssets(userId: string, assetId: string, price: number) {
+  return httpClient.post('/bids', {
+    userId,
+    assetId,
+    price,
+  });
+}
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { getAssets, setBidAssets };

@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import Button from '../UI/Button';
 import { Asset } from '../../models/Asset';
 import classNames from 'classnames';
@@ -14,10 +16,18 @@ type ItemCardProps = {
   pictureUrl?: string;
   itemAsset?: Asset;
   isStart?: boolean;
+  showButton?: boolean;
+  dataInRow?: boolean;
 };
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-  const { className, itemAsset, isStart = false } = props;
+  const {
+    className,
+    itemAsset,
+    isStart = false,
+    showButton,
+    dataInRow = false,
+  } = props;
 
   const now = useMemo(() => new Date(), []);
 
@@ -42,13 +52,13 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     loadAuction();
   }, [itemAsset.auctionId]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => setCounter((old) => old + 1), 1000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => setCounter((old) => old + 1), 1000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
-  console.log({ counter });
+  // console.log({ counter });
 
   return (
     <div className={classes}>
@@ -65,27 +75,38 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
       />
       <label className="sy-item-card__lorem">{itemAsset.title}</label>
       <div className="sy-item-card__btn-box">
-        <div className="sy-item-card__box">
-          <p>Company</p>
-          <p>{itemAsset.companyName}</p>
-          <p>{isStart ? 'End time' : 'Start time'}</p>
-          <p>
-            {itemAuction
-              ? prepareDifferenceLabel(
-                  now,
-                  itemAuction.endDate as string,
-                  counter,
-                )
-              : 'Loading...'}
-          </p>
+        <div
+          className={classNames('sy-item-card__box', {
+            'sy-item-card__box--row': dataInRow,
+          })}
+        >
+          <div className={dataInRow && 'sy-item-card__box--row__company'}>
+            <p>Company </p>
+            <p>{itemAsset.companyName}</p>
+          </div>
+          <div className={dataInRow && 'sy-item-card__box--row__time'}>
+            <p>{isStart ? 'End time' : 'Start time'}</p>
+            <p>
+              {itemAuction
+                ? prepareDifferenceLabel(
+                    now,
+                    itemAuction.endDate as string,
+                    counter,
+                  )
+                : 'Loading...'}
+            </p>
+          </div>
         </div>
-        <Button
+
+        <NavLink to="/auction-product">BID</NavLink>
+        {/* <Button
           styleType="primary"
           variant="outline"
+          showButton={showButton}
           className="sy-item-card__btn-bid"
         >
-          BID
-        </Button>
+          
+        </Button> */}
       </div>
     </div>
   );

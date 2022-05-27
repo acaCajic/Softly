@@ -7,7 +7,7 @@ const PASSWORD_REGEX =
 const MUST_CONTAIN_LETTER = /(?=.*?[a-z, A-Z])/;
 const MUST_CONTAIN_NUMBER = /(?=.*?[0-9])/;
 
-const VALID: any = undefined;
+export const VALID: any = undefined;
 
 export const required = (errMessage: string) => (value: any) => {
   if (typeof value === 'string') {

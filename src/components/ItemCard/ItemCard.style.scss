@@ -30,10 +30,24 @@
     @include flex(column, flex-start);
 
     //padding-top: 18px;
-    > p {
+    p {
       margin: 0;
     }
     //height: 58px;
+  }
+
+  &__box--row {
+    p {
+      margin-right: 6px;
+    }
+    @include flex(column);
+    &__company {
+      @include flex(row);
+    }
+
+    &__time {
+      @include flex(row);
+    }
   }
 
   &__btn-bid {

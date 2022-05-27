@@ -12,13 +12,16 @@ import './AuctionGallery.style.scss';
 import './AuctionGallery.responsive.style.scss';
 import { usePagination } from '../../hooks/usePagination';
 import dayjs from 'dayjs';
+import { useContext } from 'react';
+import GeneralContext from '../../Providers/GeneralProvider/General.context';
 
 type AuctionGalleryProps = {
   className?: 'string';
 };
 const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
   const { className } = props;
-
+  const { user } = useContext(GeneralContext);
+  console.log(user, 'user in auction gallery');
   const classes = classNames('sy-auction-gallery', className);
 
   const [auctions, setAuctions] = useState<{

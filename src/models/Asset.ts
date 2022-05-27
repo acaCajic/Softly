@@ -6,6 +6,7 @@ export type Asset = {
   additionalComments: string;
   status: string;
   currentBid: number;
+  startBid: number;
   firstName: string;
   lastName: string;
   email: string;
