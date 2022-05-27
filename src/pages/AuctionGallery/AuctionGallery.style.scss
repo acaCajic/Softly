@@ -1,0 +1,115 @@
+@use '../../scss/filesettings' as *;
+
+.sy-auction-gallery {
+  @include flex(column);
+
+  width: 100%;
+
+  .sy-nav,
+  footer {
+    width: 100%;
+  }
+
+  &__container {
+    @include flex(column);
+    @include size(100%);
+
+    max-width: 1020px;
+    margin: 0 auto;
+  }
+
+  &__live-auctions {
+    @include flex(column, center, center);
+
+    width: 100%;
+
+    &__header {
+      @include flex(row, center, center);
+
+      width: 100%;
+
+      margin-top: 106px;
+      margin-bottom: 94px;
+
+      &__p-live-auctions {
+        @include font(36px, 42px, 700);
+
+        font-family: Bodoni;
+        padding-right: 40px;
+        border-bottom: 4px solid $softly-dusty-rose;
+      }
+      &__p-upcoming {
+        @include font(18px, 22px, 800);
+
+        margin-right: auto;
+        margin-left: 148px;
+        font-family: Orqquidea-Sans;
+      }
+
+      &__btn-sort {
+        @include font(24px, 28px, 400);
+
+        padding: 0px;
+        width: fit-content;
+        font-family: Bodoni;
+      }
+    }
+
+    &__cards {
+      display: grid;
+      grid-row-start: auto;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 84px;
+      row-gap: 96px;
+    }
+
+    &__load-more {
+      @include font(24px, 28px, 400);
+
+      font-family: Bodoni;
+      color: $softly-green;
+      margin-top: 114px;
+    }
+  }
+  &__upcoming {
+    @include flex(column, center, center);
+  }
+
+  &__paragraph {
+    @include flex(row, center, center);
+
+    margin-top: 140px;
+
+    background-color: $softly-dusty-rose;
+
+    padding: 48px 58px 48px 78px;
+    margin-bottom: 250px;
+
+    &__picture {
+      @include size(338px, 144px);
+
+      margin-right: 112px;
+    }
+
+    &__text-btn {
+      &__title {
+        @include font(36px, 42px, 700);
+
+        color: $softly-cream;
+      }
+
+      &__text {
+        @include font(14px, 30px, 700);
+
+        font-family: Bodoni 72;
+        color: $softly-cream;
+      }
+
+      &__btn {
+        @include size(150px, 42px);
+
+        margin-left: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@use '../../scss/filesettings' as *;
+
+.sy-item-card {
+  @include phablet {
+    &__lorem {
+      font-size: 18px;
+    }
+  }
+
+  @include mobile {
+    &__lorem {
+      font-size: 14px;
+    }
+  }
+}

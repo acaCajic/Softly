@@ -8,7 +8,7 @@ type ButtonProps = {
   styleType?: 'primary' | 'secondary';
   variant?: 'icon' | 'outline' | 'solid' | 'link';
   icon?: React.ReactNode;
-  positionIcon?: 'icon-left' | 'icon-right';
+  positionIcon?: 'icon-left' | 'icon-right' | 'icon-down';
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
@@ -33,6 +33,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     {
       'btn-style--icon-left': positionIcon === 'icon-left',
       'btn-style--icon-right': positionIcon === 'icon-right',
+      'btn-style--icon-down': positionIcon === 'icon-down',
     },
   );
 

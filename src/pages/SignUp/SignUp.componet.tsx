@@ -1,17 +1,26 @@
 import React, { useCallback, useContext } from 'react';
-import Input from '../../components/UI/Input';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CheckBox from '../../components/UI/CheckBox';
 import Button from '../../components/UI/Button';
 import Spinner from '../../components/UI/Spinner';
 import api from '../../api';
-import { validateEmail, checkPassword } from '../../services/validators';
+import {
+  validateEmail,
+  checkPassword,
+  composeValidators,
+  mustContainerNumber,
+  mustContainLetter,
+  required,
+} from '../../services/validators';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { AxiosError } from 'axios';
 import { toastError } from '../../utils';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
+import FormWrapper from '../../components/FormWrapper';
+import Field from '../../components/FormWrapper/components/Field';
+import InputField from '../../components/Fields/InputField';
 
 import './SignUp.style.scss';
 import './SignUp.style.responsive.scss';
@@ -34,14 +43,12 @@ const SignUp: React.FC<SignUpProps> = (props) => {
 
   const { setUser } = useContext(GeneralContext);
 
-  const [values, setValues] = useState<SignUpValues>({});
   const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+    async (values: SignUpValues) => {
       try {
         const { email } = values;
         setLoading(true);
@@ -58,11 +65,11 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         setLoading(false);
       }
     },
-    [navigate, setUser, values],
+    [navigate, setUser],
   );
 
   return (
-    <form onSubmit={handleSubmit} className={classes}>
+    <FormWrapper<SignUpValues> onSubmit={handleSubmit} className={classes}>
       <img
         src="/assets/images/logo.png"
         alt="signUp-logo"
@@ -70,69 +77,68 @@ const SignUp: React.FC<SignUpProps> = (props) => {
       />
       <label className="sy-signup__label-create">Sign Up</label>
 
-      <Input
-        type="text"
+      <Field
         name="firstName"
+        component={InputField}
+        type="text"
+        className="sy-signup__first-name"
         labelName="First Name"
         placeholder="Contents"
-        className="sy-signup__first-name"
-        onChange={(e) =>
-          setValues((oldValues) => ({
-            ...oldValues,
-            firstName: e.target.value,
-          }))
-        }
-      ></Input>
+        validate={composeValidators(required('This field is required'))}
+      />
 
-      <Input
-        type="text"
+      <Field
         name="lastName"
+        component={InputField}
+        type="text"
+        className="sy-signup__last-name"
         labelName="Last Name"
         placeholder="Contents"
-        className="sy-signup__last-name"
-        onChange={(e) =>
-          setValues((oldValues) => ({ ...oldValues, lastName: e.target.value }))
-        }
-      ></Input>
+        validate={composeValidators(required('This field is required'))}
+      />
 
-      <Input
-        type="text"
+      <Field
         name="email"
+        component={InputField}
+        type="email"
+        className="sy-signup__input-email"
         labelName="Email"
         placeholder="Contents"
-        className="sy-signup__input-email"
-        // validateFunction={validateEmail}
-        onChange={(e) =>
-          setValues((oldValues) => ({ ...oldValues, email: e.target.value }))
-        }
-      ></Input>
+        validate={composeValidators(
+          required('This field is required'),
+          validateEmail('Email is not valid'),
+        )}
+      />
 
-      <Input
-        type="password"
+      <Field
         name="password"
+        component={InputField}
+        type="password"
+        className="sy-signup__input-password"
         labelName="Password"
         placeholder="Contents"
-        className="sy-signup__input-password"
-        //validateFunction={validatePassword}
-        onChange={(e) =>
-          setValues((oldValues) => ({ ...oldValues, password: e.target.value }))
-        }
-      ></Input>
-      <Input
-        type="password"
+        validate={composeValidators(
+          required('This field is required'),
+          mustContainerNumber('Password must container number'),
+          mustContainLetter('Password must container letter'),
+        )}
+      />
+
+      <Field
         name="repeatPassword"
-        labelName="Repeat Password"
-        placeholder="Contents"
+        component={InputField}
+        type="password"
         className="sy-signup__input-repeat-password"
-        errMsg="Incorect password"
-        validateFunction={(value) => checkPassword(values.password, value)}
-        onChange={(e) =>
-          setValues((oldValues) => ({
-            ...oldValues,
-            repeatPassword: e.target.value,
-          }))
-        }
-      ></Input>
+        labelName="Password"
+        placeholder="Contents"
+        validate={composeValidators(
+          required('This field is required'),
+          mustContainerNumber('Password must container number'),
+          mustContainLetter('Password must container letter'),
+          checkPassword('Password must match', 'password'),
+        )}
+      />
+
       <div className="sy-signup__checkbox-p">
         <CheckBox />
         <p className="sy-signup__p">
@@ -154,7 +160,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         </Link>
       </div>
       {loading && <Spinner size="small" />}
-    </form>
+    </FormWrapper>
   );
 };
 

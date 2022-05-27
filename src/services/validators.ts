@@ -31,10 +31,12 @@ export const validatePassword = (errMessage: string) => (value: string) => {
   return PASSWORD_REGEX.test(value) ? VALID : errMessage;
 };
 
-export const checkPassword = (password: string, repeatPassword: string) => {
-  if (password === repeatPassword) return true;
-  else return false;
-};
+export const checkPassword =
+  (errMessage: string, otherField: string) =>
+  (value: string, allValues: Record<string, any>) => {
+    if (allValues[otherField] === value) return VALID;
+    else return errMessage;
+  };
 
 export const composeValidators =
   (...validators: Array<FieldValidator<any>>) =>

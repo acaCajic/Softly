@@ -1,0 +1,43 @@
+@use '../../scss/filesettings' as *;
+
+.sy-auction-product {
+  @include flex(row, center);
+
+  width: 100%;
+  max-width: 960px;
+  margin: 106px auto 248px;
+  font-family: Bodoni72;
+
+  &__first-column {
+    @include flex(column);
+
+    max-width: 284px;
+
+    &__title {
+      @include font(36px, 42px, 700);
+
+      font-family: Bodoni72;
+      border-bottom: 4px solid $softly-dusty-rose;
+      padding-right: 0;
+    }
+
+    &__status {
+      @include font(24px, 28px, 400);
+    }
+
+    &__body {
+      @include font(14px, 30px, 400);
+    }
+  }
+
+  &__second-column {
+    margin-left: 86px;
+    margin-right: 66px;
+  }
+
+  /*&__container {
+    @include flex(row, center);
+
+    max-width: 960px;
+  }*/
+}

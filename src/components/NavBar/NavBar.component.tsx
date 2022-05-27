@@ -3,23 +3,21 @@ import classNames from 'classnames';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
 import ButtonMenu from '../UI/ButtonMenu';
 import { NavLink } from 'react-router-dom';
+import { RouteProps } from '../../router/routes';
 import Button from '../UI/Button';
 
 import './NavBar.style.scss';
 import './NavBar.responsive.style.scss';
 
+export type NavigationBarType = Pick<RouteProps, 'path' | 'title'>;
+
 type NavBarProps = {
   className?: string;
+  routes: Array<NavigationBarType>;
 };
 
-const navItems = [
-  { title: 'ABOUT', to: '/about' },
-  { title: 'AUCTIONS', to: '/auctions' },
-  { title: 'EXPERIENCES', to: '/experiences' },
-];
-
 const NavBar: React.FC<NavBarProps> = (props) => {
-  const { className } = props;
+  const { className, routes } = props;
 
   const { logout } = useContext(GeneralContext);
 
@@ -29,10 +27,10 @@ const NavBar: React.FC<NavBarProps> = (props) => {
 
   const renderNavLinks = useMemo(
     () =>
-      navItems.map((item, index) => {
+      routes.map((item, index) => {
         return (
           <NavLink
-            to={item.to}
+            to={item.path}
             key={index}
             className={({ isActive }) =>
               classNames('sy-nav__link', {
@@ -44,12 +42,18 @@ const NavBar: React.FC<NavBarProps> = (props) => {
           </NavLink>
         );
       }),
-    [],
+    [routes],
   );
 
   return (
     <div className={classes}>
-      <img src="/assets/images/logo.png" alt="logo" className="sy-nav__logo" />
+      <NavLink to="/home">
+        <img
+          src="/assets/images/logo.png"
+          alt="logo"
+          className="sy-nav__logo"
+        />
+      </NavLink>
 
       <aside
         className={classNames('sy-nav__sidedrawer', {

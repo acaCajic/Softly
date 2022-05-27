@@ -5,34 +5,20 @@
 
   &__container {
     @include flex(row);
-    /* position: fixed;
-    top: 140px;
-    width: 100%;
-    height: 90%;*/
-    // background-color: red;
   }
+
   &__side-menu {
     @include flex(column);
 
     width: 210px;
     height: 730px;
-    // position: absolute;
-    //flex-grow: 1;
-    // position: absolute;
-    //top: 0;
-    //left: 0;
-    //bottom: 0;
+
     background-color: $softly-dusty-rose;
 
     &__picture-name {
       @include flex(column, center, center);
-      // width: 50px;
-      //height: 40px;
-      // background-color: yellow;
-      &__picture {
-        //width: 20px;
-        //height: 20px;
 
+      &__picture {
         background-color: white;
         margin-top: 54px;
         border-radius: 100px;
@@ -72,7 +58,7 @@
 
     &__wallet-assets {
       @include flex(column);
-      background-color: green;
+      //background-color: green;
       flex-grow: 1;
 
       &__label {
@@ -82,15 +68,8 @@
         padding-right: 6px;
       }
 
-      /* &__metamask {
-        width: 332px;
-        height: 54px;
-        background-color: red;
-      }*/
-
       &__assets {
         padding-bottom: 7px;
-        //padding-right: 280px;
         border-bottom: 1px solid $softly-green;
       }
     }
@@ -98,7 +77,6 @@
     &__balance-transaction {
       @include flex(column);
       flex-grow: 1;
-      background-color: red;
     }
   }
 }

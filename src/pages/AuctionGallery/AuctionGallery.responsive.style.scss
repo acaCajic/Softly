@@ -1,0 +1,171 @@
+@use '../../scss/filesettings' as *;
+
+.sy-auction-gallery {
+  @include tablet-cards-auctions() {
+    &__container {
+      max-width: 640px;
+    }
+
+    &__live-auctions {
+      @include flex(column, center, center);
+
+      width: 100%;
+
+      &__header {
+        @include flex(row, center, center);
+
+        width: 100%;
+        margin-bottom: 58px;
+        margin-top: 64px;
+
+        &__p-upcoming {
+          margin: 0 auto 0 0;
+        }
+
+        &__p-live-auctions {
+          margin: 0px;
+        }
+      }
+
+      &__cards {
+        grid-template-columns: repeat(2, 1fr);
+
+        > .sy-item-card {
+          > .sy-item-card__picture {
+            width: 270px;
+            height: 290px;
+            column-gap: 96px;
+          }
+        }
+      }
+    }
+
+    &__paragraph {
+      @include flex(column, center, center);
+
+      margin-top: 106px;
+      max-width: 430px;
+      margin-left: auto;
+
+      background-color: $softly-dusty-rose;
+
+      padding: 32px 38px 32px 38px;
+      margin-bottom: 162px;
+
+      &__picture {
+        display: none;
+      }
+
+      &__text-btn {
+        &__title {
+          @include font(34px, 40px, 700);
+
+          color: $softly-cream;
+        }
+
+        &__text {
+          @include font(12px, 30px, 700);
+
+          font-family: Bodoni 72;
+          color: $softly-cream;
+        }
+
+        &__btn {
+          @include size(150px, 42px);
+
+          margin-left: auto;
+        }
+      }
+    }
+  }
+
+  @include mobile-cards-auctions() {
+    &__live-auctions {
+      @include flex(column, center, center);
+
+      width: 100%;
+
+      &__header {
+        @include flex(row, center, center);
+
+        width: 100%;
+        margin-top: 54px;
+        margin-bottom: 50px;
+        max-width: 336px;
+
+        &__p-live-auctions {
+          @include font(24px, 28px, 700);
+
+          margin-right: 8px;
+        }
+
+        &__p-upcoming {
+          @include font(14px, 16px, 800);
+        }
+
+        &__btn-sort {
+          @include font(14px, 16px, 400);
+        }
+      }
+
+      &__cards {
+        max-width: 336px;
+
+        column-gap: 40px;
+        row-gap: 48px;
+
+        > .sy-item-card {
+          @include flex(column);
+          > .sy-item-card__picture {
+            width: 148px;
+            height: 180px;
+          }
+          > .sy-item-card__btn-box {
+            @include flex(column);
+          }
+        }
+      }
+      &__load-more {
+        @include font(14px, 16px, 400);
+
+        margin-top: 64px;
+      }
+    }
+
+    &__paragraph {
+      @include flex(column, center, center);
+
+      margin-top: 64px;
+
+      background-color: $softly-dusty-rose;
+
+      padding: 32px 38px 32px 38px;
+      margin-bottom: 162px;
+
+      &__picture {
+        display: none;
+      }
+
+      &__text-btn {
+        &__title {
+          @include font(24px, 28px, 700);
+
+          color: $softly-cream;
+        }
+
+        &__text {
+          @include font(12px, 30px, 700);
+
+          font-family: Bodoni 72;
+          color: $softly-cream;
+        }
+
+        &__btn {
+          @include size(150px, 42px);
+
+          margin-left: auto;
+        }
+      }
+    }
+  }
+}

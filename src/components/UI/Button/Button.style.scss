@@ -1,7 +1,7 @@
 @use '../../../scss/filesettings' as *;
 
 .btn-style {
-  @include size(140px, 28px);
+  @include size(140px, auto);
   @include font(18px, 22px, 600);
   @include flex(row-reverse, center, center);
 
@@ -50,5 +50,8 @@
     svg {
       margin-left: 8px;
     }
+  }
+  &--icon-down {
+    flex-direction: column-reverse;
   }
 }
