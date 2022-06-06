@@ -21,7 +21,7 @@ type AuctionGalleryProps = {
 const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
   const { className } = props;
   const { user } = useContext(GeneralContext);
-  console.log(user, 'user in auction gallery');
+  // console.log(user, 'user in auction gallery');
   const classes = classNames('sy-auction-gallery', className);
 
   const [auctions, setAuctions] = useState<{

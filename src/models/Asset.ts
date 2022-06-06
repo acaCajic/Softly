@@ -16,5 +16,7 @@ export type Asset = {
   auctionId: string;
   pictureKey?: string;
   pictureUrl: string;
+  endDate: string;
+  startDate: string;
   id: string;
 };

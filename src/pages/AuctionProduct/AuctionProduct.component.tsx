@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Button from '../../components/UI/Button';
 import InputField from '../../components/Fields/InputField';
 import Field from '../../components/FormWrapper/components/Field';
@@ -12,10 +12,13 @@ import {
   validateEmail,
 } from '../../services/validators';
 import api from '../../api';
-
-import './AuctionProduct.style.scss';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
 import FormWrapper from '../../components/FormWrapper';
+import { useParams } from 'react-router-dom';
+import Spinner from '../../components/UI/Spinner';
+
+import './AuctionProduct.style.scss';
+import './AuctionProduct.responsive.styles.scss';
 
 type AuctionProductProps = {
   className?: string;
@@ -31,30 +34,53 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
 
   const contextValues = useContext(GeneralContext);
   const { user } = contextValues;
-  console.log(contextValues, 'in auction product');
+  // console.log(contextValues, 'in auction product');
+
+  const [asset, setAsset] = useState<Asset>();
+  const [loading, setLoading] = useState<Boolean>();
+  const { auctionId } = useParams<{ auctionId: string }>();
+  useEffect(() => {
+    const loadItemAsset = async () => {
+      try {
+        setLoading(true);
+        const { data: assetItem } = await api.assets.getAsset(auctionId);
+        setAsset(assetItem);
+        console.log(assetItem);
+      } catch (e) {
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadItemAsset();
+    // const { assetItem }: any = await api.assets.getAsset(auctionId);
+  }, [auctionId]);
 
   const onSubmit = async (values: FormValue) => {
-    console.log('here submit', user, itemAsset.id, values.price);
+    // console.log('here submit', user, itemAsset.id, values.price);
     try {
       const { price } = values;
       const { data } = await api.assets.setBidAssets(
         user.id,
-        itemAsset.id,
+        asset.id,
         values.price,
       );
+
       console.log(data);
     } catch (e) {
       console.error(e);
     }
   };
 
+  console.log(auctionId);
   const classes = classNames('sy-auction-product', className);
   return (
     <div className={classes}>
+      {/* <p className="sy-auction-product__first-column__title">Title</p> */}
       <div className="sy-auction-product__first-column">
         <p className="sy-auction-product__first-column__title">Title</p>
         <p className="sy-auction-product__first-column__status">
-          Status: <span>{itemAsset.status}</span>
+          Status: <span>{asset?.status}</span>
         </p>
         <p className="sy-auction-product__first-column__body">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -69,12 +95,14 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
         </p>
       </div>
       <div className="sy-auction-product__second-column">
-        <ItemCard
-          itemAsset={itemAsset}
-          isStart={false}
-          showButton={false}
-          dataInRow={true}
-        />
+        {asset && (
+          <ItemCard
+            itemAsset={asset}
+            isStart={false}
+            showButton={false}
+            dataInRow={true}
+          />
+        )}
       </div>
       <div className="sy-auction-product__third-column">
         <p className="sy-auction-product__third-column__starting-price">
@@ -120,6 +148,7 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
           </Button>
         </FormWrapper>
       </div>
+      {loading && <Spinner />}
     </div>
   );
 };

@@ -21,5 +21,9 @@ async function setBidAssets(userId: string, assetId: string, price: number) {
   });
 }
 
+async function getAsset(id: string) {
+  return httpClient.get<Asset>(`/assets/${id}`);
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAssets, setBidAssets };
+export default { getAssets, getAsset, setBidAssets };

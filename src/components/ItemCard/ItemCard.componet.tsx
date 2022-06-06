@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import Button from '../UI/Button';
 import { Asset } from '../../models/Asset';
 import classNames from 'classnames';
 import api from '../../api';
@@ -25,7 +24,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     className,
     itemAsset,
     isStart = false,
-    showButton,
+    showButton = true,
     dataInRow = false,
   } = props;
 
@@ -40,7 +39,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     const loadAuction = async () => {
       try {
         const dataAuctions = await api.auctions.getAuction(
-          itemAsset.auctionId.toString(),
+          itemAsset?.auctionId.toString(),
         );
 
         setItemAuction(dataAuctions.data);
@@ -50,7 +49,13 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     };
 
     loadAuction();
-  }, [itemAsset.auctionId]);
+  }, [itemAsset]);
+
+  let navigate = useNavigate();
+
+  const handleClick = useCallback(() => {
+    navigate(`auction-product/${itemAsset.id}`);
+  }, [itemAsset, navigate]);
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => setCounter((old) => old + 1), 1000);
@@ -98,15 +103,14 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
           </div>
         </div>
 
-        <NavLink to="/auction-product">BID</NavLink>
-        {/* <Button
-          styleType="primary"
-          variant="outline"
-          showButton={showButton}
-          className="sy-item-card__btn-bid"
-        >
-          
-        </Button> */}
+        {showButton && (
+          <Link
+            to={`/auctions-gallery/${itemAsset.id}`}
+            className="sy-item-card__nav-link"
+          >
+            BID
+          </Link>
+        )}
       </div>
     </div>
   );

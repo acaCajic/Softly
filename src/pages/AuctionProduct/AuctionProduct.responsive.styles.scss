@@ -1,0 +1,45 @@
+@use '../../scss/filesettings' as *;
+
+.sy-auction-product {
+  &__first-column {
+  }
+
+  &__second-column {
+    @include mobile {
+      margin: 0 28px 0 40px;
+      img {
+        width: 148px;
+        height: 180px;
+      }
+    }
+
+    .sy-item-card__box--row__company,
+    .sy-item-card__box--row__time {
+      @include flex(column);
+    }
+
+    .sy-item-card__btn-box {
+      padding: 0;
+    }
+  }
+
+  &__third-column {
+    margin: 0;
+    @include mobile {
+      &__bid {
+        margin-top: 36px;
+
+        &__btn {
+          width: 150px;
+          height: 42px;
+          margin-left: 0;
+        }
+
+        &__input {
+          width: 150px;
+          //height: 42px;
+        }
+      }
+    }
+  }
+}
