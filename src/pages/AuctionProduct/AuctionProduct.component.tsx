@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Button from '../../components/UI/Button';
 import InputField from '../../components/Fields/InputField';
 import Field from '../../components/FormWrapper/components/Field';
@@ -9,7 +9,7 @@ import { Asset } from '../../models/Asset';
 import {
   composeValidators,
   required,
-  validateEmail,
+  minValue,
 } from '../../services/validators';
 import api from '../../api';
 import GeneralContext from '../../Providers/GeneralProvider/General.context';
@@ -19,6 +19,8 @@ import Spinner from '../../components/UI/Spinner';
 
 import './AuctionProduct.style.scss';
 import './AuctionProduct.responsive.styles.scss';
+import utils from '../../utils';
+import { FormWrapperRef } from '../../components/FormWrapper/FormWrapper.component';
 
 type AuctionProductProps = {
   className?: string;
@@ -34,7 +36,8 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
 
   const contextValues = useContext(GeneralContext);
   const { user } = contextValues;
-  // console.log(contextValues, 'in auction product');
+
+  const formRef = useRef<FormWrapperRef>(null);
 
   const [asset, setAsset] = useState<Asset>();
   const [loading, setLoading] = useState<Boolean>();
@@ -53,22 +56,28 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
     };
 
     loadItemAsset();
-    // const { assetItem }: any = await api.assets.getAsset(auctionId);
   }, [auctionId]);
 
   const onSubmit = async (values: FormValue) => {
-    // console.log('here submit', user, itemAsset.id, values.price);
     try {
-      const { price } = values;
+      setLoading(true);
       const { data } = await api.assets.setBidAssets(
         user.id,
         asset.id,
         values.price,
       );
 
-      console.log(data);
+      utils.toastSuccess('You successfully made new bid!');
+      setAsset((oldValue) => ({
+        ...oldValue,
+        currentBid: values.price,
+      }));
+
+      formRef.current.resetFieldValue('price');
     } catch (e) {
       console.error(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,7 +85,6 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
   const classes = classNames('sy-auction-product', className);
   return (
     <div className={classes}>
-      {/* <p className="sy-auction-product__first-column__title">Title</p> */}
       <div className="sy-auction-product__first-column">
         <p className="sy-auction-product__first-column__title">Title</p>
         <p className="sy-auction-product__first-column__status">
@@ -109,13 +117,13 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
           STARTING PRICE
         </p>
         <p className="sy-auction-product__third-column__starting-price__value">
-          {itemAsset.startBid}
+          {asset?.startBid}
         </p>
         <p className="sy-auction-product__third-column__current-bid">
           CURRENT BID
         </p>
         <p className="sy-auction-product__third-column__current-bid__value">
-          {itemAsset.currentBid}
+          {asset?.currentBid}
         </p>
         <p className="sy-auction-product__third-column__time-elapsed">
           TIME ELAPSED
@@ -125,17 +133,25 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
         </p>
 
         <FormWrapper<FormValue>
+          ref={formRef}
           onSubmit={onSubmit}
           className="sy-auction-product__third-column__bid"
         >
           <Field
             name="price"
             component={InputField}
-            type="text"
+            type="number"
+            min={asset?.currentBid}
             className="sy-auction-product__third-column__bid__input"
             labelName="Input Bid Amount"
             placeholder="$$$"
-            validate={required('This field is required')}
+            validate={composeValidators(
+              required('This field is required'),
+              minValue(
+                'Current bid must be greather than start bid',
+                asset?.currentBid,
+              ),
+            )}
           />
 
           <Button

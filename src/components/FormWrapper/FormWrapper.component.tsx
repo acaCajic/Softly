@@ -36,6 +36,7 @@ function FormWrapper<T extends Record<string, any> = Record<string, any>>(
     setTouched,
     setIsSubmitted,
     setIsSubmitting,
+    resetFieldValue,
   } = formValues;
 
   const onSubmit = useCallback(
@@ -65,8 +66,8 @@ function FormWrapper<T extends Record<string, any> = Record<string, any>>(
 
   useImperativeHandle(
     ref,
-    () => ({ isValid, isSubmitted, values, errors, touched }),
-    [isValid, isSubmitted, values, errors, touched],
+    () => ({ isValid, isSubmitted, values, errors, touched, resetFieldValue }),
+    [isValid, isSubmitted, values, errors, touched, resetFieldValue],
   );
 
   return (

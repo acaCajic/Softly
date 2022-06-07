@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import FormContext from './Form.context';
 
 type FormProviderProps = {
@@ -24,6 +24,12 @@ const FormProvier: React.FC<FormProviderProps> = (props) => {
     );
   }, [errors]);
 
+  const resetFieldValue = useCallback((fieldName: string) => {
+    setValues((oldValues) => ({ ...oldValues, [fieldName]: undefined }));
+    setErrors((oldErrors) => ({ ...oldErrors, [fieldName]: undefined }));
+    setTouched({});
+  }, []);
+
   return (
     <FormContext.Provider
       value={{
@@ -35,6 +41,7 @@ const FormProvier: React.FC<FormProviderProps> = (props) => {
         isSubmitting,
         setIsSubmitted,
         setIsSubmitting,
+        resetFieldValue,
         setErrors,
         setValues,
         setTouched,

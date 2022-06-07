@@ -31,6 +31,12 @@ export const validatePassword = (errMessage: string) => (value: string) => {
   return PASSWORD_REGEX.test(value) ? VALID : errMessage;
 };
 
+export const minValue =
+  (errMessage: string, currentBid: number) => (value: string) => {
+    if (parseInt(value) > currentBid) return VALID;
+    else return errMessage;
+  };
+
 export const checkPassword =
   (errMessage: string, otherField: string) =>
   (value: string, allValues: Record<string, any>) => {

@@ -20,12 +20,17 @@
       border-bottom: 4px solid $softly-dusty-rose;
       padding-right: 0;
       margin-bottom: 50px;
+      position: absolute;
+      top: 0;
+      margin-top: 240px;
+      padding-right: 15px;
     }
 
     &__status {
       @include font(24px, 28px, 400);
 
       margin-bottom: 46px;
+      margin-top: 100px;
     }
 
     &__body {
@@ -77,6 +82,14 @@
         margin-top: 24px;
         margin-left: auto;
       }
+
+      &__input {
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
     }
   }
 
@@ -88,19 +101,32 @@
       grid-template-columns: 1fr 1fr;
     }
 
-    &__first-column:nth-child(1) {
+    &__first-column {
       order: 3;
       margin: 54px 66px 0 86px;
       grid-row: 2;
       max-width: unset;
-      width: 100%;
-    }
-    &__second-column:nth-child(2) {
-      order: 1;
-    }
-    &__third-column:nth-child(3) {
-      order: 2;
 
+      &__title {
+        position: absolute;
+        top: 0;
+        margin-top: 204px;
+        padding-right: 10px;
+      }
+
+      &__status {
+        margin-top: 0px;
+      }
+    }
+
+    &__second-column {
+      order: 1;
+      margin-top: 64px;
+    }
+
+    &__third-column {
+      order: 2;
+      margin-top: 64px;
       width: fit-content;
     }
   }

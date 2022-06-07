@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { PaginatedData } from '../models/PaginatedData';
 
 export type PaginationType<T> = {
@@ -32,6 +32,11 @@ export function usePagination<T extends Record<string, any>>(
     setCurrentPage((oldPage) => Math.min(oldPage + 1, totalPages));
   }, [totalPages]);
 
+  const shouldLoadMore = useMemo(
+    () => currenttPage !== totalPages,
+    [currenttPage, totalPages],
+  );
+
   const getItems = useCallback(async () => {
     try {
       if (!request) return;
@@ -56,6 +61,7 @@ export function usePagination<T extends Record<string, any>>(
   }, [currenttPage]);
 
   return {
+    shouldLoadMore,
     currenttPage,
     items,
     totalItems,
