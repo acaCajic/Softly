@@ -20,14 +20,11 @@ export const toastSuccess = (message: string) => {
   });
 };
 
-export const prepareDifferenceLabel = (
-  now: Date,
-  dateString: string,
-  counter: number,
-) => {
+export const prepareDifferenceLabel = (now: Date, dateString: string) => {
   return dayjs(dateString).fromNow().toString();
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   toastError,
   toastSuccess,

@@ -50,7 +50,6 @@ const PinInput: React.FC<PinInputProps> = (props) => {
     },
     [],
   );
-  console.log({ activeIndex, deletionActive });
 
   const handleInput = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

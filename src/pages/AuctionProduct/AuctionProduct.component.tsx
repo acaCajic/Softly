@@ -4,7 +4,6 @@ import Button from '../../components/UI/Button';
 import InputField from '../../components/Fields/InputField';
 import Field from '../../components/FormWrapper/components/Field';
 import ItemCard from '../../components/ItemCard';
-import { mockData } from '../../mockData';
 import { Asset } from '../../models/Asset';
 import {
   composeValidators,
@@ -32,7 +31,7 @@ type FormValue = {
 };
 
 const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
-  const { className, itemAsset = mockData[0] } = props;
+  const { className } = props;
 
   const contextValues = useContext(GeneralContext);
   const { user } = contextValues;
@@ -48,7 +47,6 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
         setLoading(true);
         const { data: assetItem } = await api.assets.getAsset(auctionId);
         setAsset(assetItem);
-        console.log(assetItem);
       } catch (e) {
       } finally {
         setLoading(false);
@@ -61,11 +59,7 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
   const onSubmit = async (values: FormValue) => {
     try {
       setLoading(true);
-      const { data } = await api.assets.setBidAssets(
-        user.id,
-        asset.id,
-        values.price,
-      );
+      await api.assets.setBidAssets(user.id, asset.id, values.price);
 
       utils.toastSuccess('You successfully made new bid!');
       setAsset((oldValue) => ({
@@ -81,7 +75,6 @@ const AuctionProduct: React.FC<AuctionProductProps> = (props) => {
     }
   };
 
-  console.log(auctionId);
   const classes = classNames('sy-auction-product', className);
   return (
     <div className={classes}>

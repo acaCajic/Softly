@@ -14,9 +14,7 @@ const Verify: React.FC<VerifyProps> = (props) => {
 
   const classes = classNames('verify', className);
 
-  const verifyPinNumber = useCallback((value: number) => {
-    console.log(value);
-  }, []);
+  const verifyPinNumber = useCallback((value: number) => {}, []);
   return (
     <form className={classes}>
       <img src="assets/images/logo.png" alt="logo" className="verify__logo" />

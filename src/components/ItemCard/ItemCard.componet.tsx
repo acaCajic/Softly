@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Asset } from '../../models/Asset';
 import classNames from 'classnames';
@@ -31,7 +31,6 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
   const now = useMemo(() => new Date(), []);
 
   const [itemAuction, setItemAuction] = useState<Auction>(null);
-  const [counter, setCounter] = useState<number>(0);
 
   const classes = classNames('sy-item-card', className);
 
@@ -51,20 +50,6 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     loadAuction();
   }, [itemAsset]);
 
-  let navigate = useNavigate();
-
-  const handleClick = useCallback(() => {
-    navigate(`auction-product/${itemAsset.id}`);
-  }, [itemAsset, navigate]);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => setCounter((old) => old + 1), 1000);
-
-  //   return () => clearInterval(intervalId);
-  // }, []);
-
-  // console.log({ counter });
-
   return (
     <div className={classes}>
       <img
@@ -72,7 +57,6 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
         alt="ItemCard"
         className="sy-item-card__picture"
         onError={(error) => {
-          console.log(error);
           (error.target as HTMLImageElement).classList.add('img--error');
           (error.target as HTMLImageElement).src =
             '/assets/images/Rectangle6.png';
@@ -93,11 +77,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
             <p>{isStart ? 'End time' : 'Start time'}</p>
             <p>
               {itemAuction
-                ? prepareDifferenceLabel(
-                    now,
-                    itemAuction.endDate as string,
-                    counter,
-                  )
+                ? prepareDifferenceLabel(now, itemAuction.endDate as string)
                 : 'Loading...'}
             </p>
           </div>

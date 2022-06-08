@@ -1,7 +1,7 @@
 @use '../../scss/filesettings' as *;
 
 .sy-item-card {
-  @include flex(column, flex-start, start);
+  @include flex(column, flex-start);
 
   width: 100%;
   max-width: 284px;
@@ -29,11 +29,9 @@
   &__box {
     @include flex(column, flex-start);
 
-    //padding-top: 18px;
     p {
       margin: 0;
     }
-    //height: 58px;
   }
 
   &__box--row {

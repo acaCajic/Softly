@@ -16,8 +16,6 @@ const GeneralProvider: React.FC<GeneralProvideProps> = (props) => {
 
   const isAuthenticate = useMemo(() => !!localStorage.getItem('token'), []);
 
-  console.log(user);
-
   const logout = useCallback(() => {
     localStorage.clear();
     navigate({ pathname: 'login' });
