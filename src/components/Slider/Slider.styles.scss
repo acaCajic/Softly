@@ -1,0 +1,43 @@
+@use '../../scss/filesettings' as *;
+
+.slider {
+  //position: relative;
+  @include flex(row);
+  @include size(100%);
+
+  position: relative;
+
+  &__prev-slide {
+    left: 36px;
+  }
+
+  &__next-slide {
+    right: 36px;
+  }
+  img {
+    width: 1440px;
+    height: 756px;
+    //transition: transform 1.35s ease-in-out;
+    transition: transform 150ms ease-in-out;
+    //transform: scale(0.975);
+    &:active {
+      transform: scale(0.975);
+    }
+  }
+
+  &__next-slide,
+  &__prev-slide {
+    @include size(60px);
+
+    position: absolute;
+    background-color: transparent;
+    border-radius: 50%;
+    color: white;
+    padding: 0px;
+    height: 70vh;
+
+    svg {
+      margin: 0px;
+    }
+  }
+}
