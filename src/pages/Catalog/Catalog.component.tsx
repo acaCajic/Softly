@@ -10,7 +10,6 @@ const Catalog: React.FC = () => {
   const [valueInput, setValueInput] = useState('');
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setValueInput(event.target.value);
   }, []);
 

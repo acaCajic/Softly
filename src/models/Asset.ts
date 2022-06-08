@@ -6,6 +6,7 @@ export type Asset = {
   additionalComments: string;
   status: string;
   currentBid: number;
+  startBid: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -15,5 +16,7 @@ export type Asset = {
   auctionId: string;
   pictureKey?: string;
   pictureUrl: string;
+  endDate: string;
+  startDate: string;
   id: string;
 };

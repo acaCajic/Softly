@@ -24,7 +24,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = (props) => {
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(value);
+      return value;
     },
     [value],
   );

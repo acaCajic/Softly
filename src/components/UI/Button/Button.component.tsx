@@ -9,6 +9,7 @@ type ButtonProps = {
   variant?: 'icon' | 'outline' | 'solid' | 'link';
   icon?: React.ReactNode;
   positionIcon?: 'icon-left' | 'icon-right' | 'icon-down';
+  showButton?: boolean;
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     icon,
     positionIcon = 'icon-right',
     className,
+    showButton = true,
     ...rest
   } = props;
 
@@ -34,6 +36,7 @@ const Button: React.FC<ButtonProps> = (props) => {
       'btn-style--icon-left': positionIcon === 'icon-left',
       'btn-style--icon-right': positionIcon === 'icon-right',
       'btn-style--icon-down': positionIcon === 'icon-down',
+      'btn-style--show': !showButton,
     },
   );
 

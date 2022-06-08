@@ -14,6 +14,7 @@ export type FormContextProps = {
   setTouched?: (values: Record<string, any>) => void;
   setIsSubmitted: (value: boolean) => void;
   setIsSubmitting: (value: boolean) => void;
+  resetFieldValue: (fieldName: string) => void;
 };
 
 export default React.createContext<FormContextProps>({
@@ -28,4 +29,5 @@ export default React.createContext<FormContextProps>({
   setTouched: noop,
   setIsSubmitted: noop,
   setIsSubmitting: noop,
+  resetFieldValue: noop,
 });

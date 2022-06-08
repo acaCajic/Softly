@@ -7,7 +7,7 @@ const PASSWORD_REGEX =
 const MUST_CONTAIN_LETTER = /(?=.*?[a-z, A-Z])/;
 const MUST_CONTAIN_NUMBER = /(?=.*?[0-9])/;
 
-const VALID: any = undefined;
+export const VALID: any = undefined;
 
 export const required = (errMessage: string) => (value: any) => {
   if (typeof value === 'string') {
@@ -30,6 +30,12 @@ export const validateEmail = (errMessage: string) => (value: string) => {
 export const validatePassword = (errMessage: string) => (value: string) => {
   return PASSWORD_REGEX.test(value) ? VALID : errMessage;
 };
+
+export const minValue =
+  (errMessage: string, currentBid: number) => (value: string) => {
+    if (parseInt(value) > currentBid) return VALID;
+    else return errMessage;
+  };
 
 export const checkPassword =
   (errMessage: string, otherField: string) =>

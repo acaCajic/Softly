@@ -1,0 +1,96 @@
+@use '../../scss/filesettings' as *;
+
+.sy-auction-product {
+  @include phablet {
+    &__first-column {
+      margin-left: 40px;
+
+      &__status {
+        margin-top: 0px;
+      }
+    }
+    &__second-column {
+      img {
+        width: 270px;
+        height: 290px;
+      }
+
+      margin: 50px 40px 0;
+    }
+    &__third-column {
+      &__bid {
+        &__input {
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    margin-bottom: 124px;
+
+    &__first-column {
+      grid-column: 1 / span 2;
+      margin: 36px 28px 0 28px;
+
+      &__title {
+        position: absolute;
+        top: 0;
+        margin-top: 190px;
+        padding-right: 10px;
+        color: $softly-green;
+      }
+
+      &__status {
+        margin-top: 0px;
+      }
+
+      &__body {
+        @include font(12px, 30px);
+      }
+    }
+
+    &__second-column {
+      margin: 48px 28px 0 28px;
+      img {
+        width: 148px;
+        height: 180px;
+      }
+
+      .sy-item-card__box--row__company,
+      .sy-item-card__box--row__time {
+        @include flex(column);
+        @include flex-gap(column, 10px);
+
+        font-size: 12px;
+
+        > p {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      .sy-item-card__btn-box {
+        padding: 0;
+      }
+    }
+
+    &__third-column {
+      margin: 0;
+      margin-top: 48px;
+      &__bid {
+        margin-top: 36px;
+
+        &__btn {
+          width: 150px;
+          height: 42px;
+          margin-left: 0;
+        }
+
+        &__input {
+          width: 150px;
+        }
+      }
+    }
+  }
+}

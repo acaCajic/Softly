@@ -51,12 +51,6 @@ export const routes = [
     authorized: true,
   },
   {
-    path: 'auction-product',
-    element: AuctionProduct,
-    authorized: true,
-  },
-
-  {
     path: 'about',
     element: About,
     authorized: true,
@@ -67,6 +61,11 @@ export const routes = [
     element: AuctionGallery,
     authorized: true,
     title: 'Auctions',
+  },
+  {
+    path: 'auctions-gallery/:auctionId',
+    element: AuctionProduct,
+    authorized: true,
   },
   {
     path: 'expericences',

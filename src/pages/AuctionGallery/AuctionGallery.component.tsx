@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import ItemCard from '../../components/ItemCard';
 import Button from '../../components/UI/Button';
@@ -18,7 +18,6 @@ type AuctionGalleryProps = {
 };
 const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
   const { className } = props;
-
   const classes = classNames('sy-auction-gallery', className);
 
   const [auctions, setAuctions] = useState<{
@@ -28,10 +27,9 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
 
   const isMobile = useMathcMedia(MATHC_MAP_NAME.IS_MOBILE);
 
-  //const [loadingg, setLoading] = useState<boolean>(false);
-
   const {
     items: liveAuctions,
+    shouldLoadMore: loadMoreLiveAuctions,
     setItems: setLiveAuctions,
     loadMore: loadLive,
     loading: loadingLiveAuctions,
@@ -41,6 +39,7 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
   });
 
   const {
+    shouldLoadMore: loadMoreUpcoming,
     items: upcomingAuctions,
     setItems: setUpcomingAuctions,
     loadMore: loadUpcoming,
@@ -49,28 +48,6 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
     request: (page: number, limit: number) =>
       api.assets.getAssets(page, limit, dayjs().toISOString()),
   });
-
-  // useEffect(() => {
-  //   const loadAuctions = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const { data } = await api.auctions.getGalleryAuctions();
-  //       const dataAuctions = await api.auctions.getAuctions();
-  //       console.log(dataAuctions.data.items);
-
-  //       setAuctions((oldAuctions) => ({
-  //         ...oldAuctions,
-  //         liveAuctions: data.liveAssets,
-  //         upcomingAuction: data.upcomingAssets,
-  //       }));
-  //     } catch (error) {
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   if (!auctions) loadAuctions();
-  // }, [auctions]);
 
   return (
     <div className={classes}>
@@ -96,14 +73,16 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
               return <ItemCard key={index} itemAsset={item} isStart={true} />;
             })}
           </div>
-          <Button
-            onClick={loadLive}
-            icon={<TriangleDown />}
-            positionIcon="icon-down"
-            className="sy-auction-gallery__live-auctions__load-more"
-          >
-            Load More
-          </Button>
+          {loadMoreLiveAuctions && (
+            <Button
+              onClick={loadLive}
+              icon={<TriangleDown />}
+              positionIcon="icon-down"
+              className="sy-auction-gallery__live-auctions__load-more"
+            >
+              Load More
+            </Button>
+          )}
           {loadingLiveAuctions && <Spinner size="small" />}
         </div>
 
@@ -128,14 +107,16 @@ const AuctionGallery: React.FC<AuctionGalleryProps> = (props) => {
               return <ItemCard key={index} itemAsset={item} isStart={false} />;
             })}
           </div>
-          <Button
-            onClick={loadUpcoming}
-            icon={<TriangleDown />}
-            positionIcon="icon-down"
-            className="sy-auction-gallery__live-auctions__load-more"
-          >
-            Load More
-          </Button>
+          {loadMoreUpcoming && (
+            <Button
+              onClick={loadUpcoming}
+              icon={<TriangleDown />}
+              positionIcon="icon-down"
+              className="sy-auction-gallery__live-auctions__load-more"
+            >
+              Load More
+            </Button>
+          )}
           {loadingUpcomingAuctions && <Spinner />}
         </div>
 

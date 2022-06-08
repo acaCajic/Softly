@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import Button from '../UI/Button';
+import { Link } from 'react-router-dom';
+
 import { Asset } from '../../models/Asset';
 import classNames from 'classnames';
 import api from '../../api';
@@ -14,15 +15,22 @@ type ItemCardProps = {
   pictureUrl?: string;
   itemAsset?: Asset;
   isStart?: boolean;
+  showButton?: boolean;
+  dataInRow?: boolean;
 };
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-  const { className, itemAsset, isStart = false } = props;
+  const {
+    className,
+    itemAsset,
+    isStart = false,
+    showButton = true,
+    dataInRow = false,
+  } = props;
 
   const now = useMemo(() => new Date(), []);
 
   const [itemAuction, setItemAuction] = useState<Auction>(null);
-  const [counter, setCounter] = useState<number>(0);
 
   const classes = classNames('sy-item-card', className);
 
@@ -30,7 +38,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     const loadAuction = async () => {
       try {
         const dataAuctions = await api.auctions.getAuction(
-          itemAsset.auctionId.toString(),
+          itemAsset?.auctionId.toString(),
         );
 
         setItemAuction(dataAuctions.data);
@@ -40,15 +48,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     };
 
     loadAuction();
-  }, [itemAsset.auctionId]);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => setCounter((old) => old + 1), 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  console.log({ counter });
+  }, [itemAsset]);
 
   return (
     <div className={classes}>
@@ -57,7 +57,6 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
         alt="ItemCard"
         className="sy-item-card__picture"
         onError={(error) => {
-          console.log(error);
           (error.target as HTMLImageElement).classList.add('img--error');
           (error.target as HTMLImageElement).src =
             '/assets/images/Rectangle6.png';
@@ -65,27 +64,33 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
       />
       <label className="sy-item-card__lorem">{itemAsset.title}</label>
       <div className="sy-item-card__btn-box">
-        <div className="sy-item-card__box">
-          <p>Company</p>
-          <p>{itemAsset.companyName}</p>
-          <p>{isStart ? 'End time' : 'Start time'}</p>
-          <p>
-            {itemAuction
-              ? prepareDifferenceLabel(
-                  now,
-                  itemAuction.endDate as string,
-                  counter,
-                )
-              : 'Loading...'}
-          </p>
-        </div>
-        <Button
-          styleType="primary"
-          variant="outline"
-          className="sy-item-card__btn-bid"
+        <div
+          className={classNames('sy-item-card__box', {
+            'sy-item-card__box--row': dataInRow,
+          })}
         >
-          BID
-        </Button>
+          <div className={dataInRow && 'sy-item-card__box--row__company'}>
+            <p>Company </p>
+            <p>{itemAsset.companyName}</p>
+          </div>
+          <div className={dataInRow && 'sy-item-card__box--row__time'}>
+            <p>{isStart ? 'End time' : 'Start time'}</p>
+            <p>
+              {itemAuction
+                ? prepareDifferenceLabel(now, itemAuction.endDate as string)
+                : 'Loading...'}
+            </p>
+          </div>
+        </div>
+
+        {showButton && (
+          <Link
+            to={`/auctions-gallery/${itemAsset.id}`}
+            className="sy-item-card__nav-link"
+          >
+            BID
+          </Link>
+        )}
       </div>
     </div>
   );

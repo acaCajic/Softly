@@ -1,7 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 
 import Button from '../../components/UI/Button';
 import CheckBox from '../../components/UI/CheckBox';
@@ -55,6 +54,7 @@ const Login: React.FC<LoginProps> = (props) => {
         const { data } = await api.auth.login(email, password);
 
         localStorage.setItem('token', data.accessToken);
+        localStorage.setItem('user', JSON.stringify(data.user));
 
         setUser(data.user);
         navigate('/home', { replace: true });
@@ -120,7 +120,6 @@ const Login: React.FC<LoginProps> = (props) => {
         <Button type="submit" styleType="primary" variant="outline">
           Go
         </Button>
-        <ToastContainer />
       </div>
       <div className="sy-login__btn-signup-text">
         <span>Don't have an account yet?</span>

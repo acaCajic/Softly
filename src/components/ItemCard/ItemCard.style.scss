@@ -1,7 +1,7 @@
 @use '../../scss/filesettings' as *;
 
 .sy-item-card {
-  @include flex(column, flex-start, start);
+  @include flex(column, flex-start);
 
   width: 100%;
   max-width: 284px;
@@ -29,16 +29,50 @@
   &__box {
     @include flex(column, flex-start);
 
-    //padding-top: 18px;
-    > p {
+    p {
       margin: 0;
     }
-    //height: 58px;
+  }
+
+  &__box--row {
+    p {
+      margin-right: 6px;
+    }
+    @include flex(column);
+    &__company {
+      @include flex(row);
+    }
+
+    &__time {
+      @include flex(row);
+    }
   }
 
   &__btn-bid {
     margin-left: auto;
     width: 150px;
     height: 42px;
+  }
+
+  &__nav-link {
+    @include flex(row, center, center);
+    margin-left: auto;
+    width: 150px;
+    height: 42px;
+    border-radius: $border-radius;
+    transition: transform 150ms ease-in-out;
+    transform: scale(1);
+    border: 1px solid #00261c;
+    text-align: center;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+
+    &:active {
+      transform: scale(0.975);
+    }
+  }
+  &__nav-link:hover {
+    color: black;
   }
 }

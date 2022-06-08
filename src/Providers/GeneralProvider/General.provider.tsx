@@ -10,7 +10,9 @@ const GeneralProvider: React.FC<GeneralProvideProps> = (props) => {
   const { children } = props;
 
   const navigate = useNavigate();
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User>(
+    JSON.parse(localStorage.getItem('user')),
+  );
 
   const isAuthenticate = useMemo(() => !!localStorage.getItem('token'), []);
 
