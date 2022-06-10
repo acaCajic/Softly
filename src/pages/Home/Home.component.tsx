@@ -6,7 +6,7 @@ import './Home.styles.scss';
 const Home: React.FC = () => {
   return (
     <div className="home-page">
-      <Slider />
+      <Slider activeLength={3} />
     </div>
   );
 };

@@ -7,11 +7,29 @@ import Button from '../UI/Button';
 import './Slider.styles.scss';
 
 type SliderProps = {
+  activeLength?: number;
   className?: string;
 };
 
+const getTranslateXValue = (
+  activeIndex: number,
+  currentIndex: number,
+  slidesLength: number,
+  activeLength: number,
+) => {
+  if (activeIndex === currentIndex) return 0;
+
+  if (
+    currentIndex === activeIndex + 1 ||
+    (slidesLength - 1 === activeIndex && currentIndex === 0)
+  )
+    return 5 / activeLength;
+
+  return ((currentIndex - activeIndex) * 100) / activeLength;
+};
+
 const Slider: React.FC<SliderProps> = (props) => {
-  const { className } = props;
+  const { className, activeLength = 1 } = props;
 
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [dataSlider, setDataSlider] = useState<Array<string>>([
@@ -51,10 +69,28 @@ const Slider: React.FC<SliderProps> = (props) => {
       {dataSlider.map((item, index) => {
         return (
           <div
-            className={slideIndex === index ? 'slide--active' : 'slide'}
+            className={classNames('common-slide', {
+              'slide--active':
+                slideIndex === index ||
+                slideIndex + 1 === index ||
+                slideIndex + 2 === index,
+              slide: slideIndex !== index,
+            })}
+            style={{
+              transform: `translate3d(${slideIndex * 33.3}vw,0,0)`,
+              // transform: `translate3d(${getTranslateXValue(
+              //   slideIndex,
+              //   index,
+              //   dataSlider.length,
+              //   activeLength,
+              // )}vw, 0, 0)`,
+              width: `${100 / activeLength}vw`,
+            }}
             key={index}
           >
-            {slideIndex === index && (
+            {(slideIndex === index ||
+              slideIndex + 1 === index ||
+              slideIndex + 2 === index) && (
               <img
                 // style={{ transform: `translate3d(${slideIndex * 100}%,0,0)` }}
                 // style={{ transform: `translate3d(${0}%,0,0)` }}
@@ -64,6 +100,7 @@ const Slider: React.FC<SliderProps> = (props) => {
                 src={item}
                 alt="a"
                 className="image"
+                style={{ width: `${100 / activeLength}vw` }}
               />
             )}
           </div>
